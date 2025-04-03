@@ -1,0 +1,346 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap');
+@import 'font-awesome/css/font-awesome.min.css';
+@import 'slick-carousel/slick/slick.css';
+@import 'slick-carousel/slick/slick-theme.css';
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;700;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  color: #000;
+  top: 0px !important;
+}
+
+:root {
+  color-scheme: light only !important;
+
+  /* Desktop Sizes */
+  --h1-font-size: 17.5px;
+  --h1-line-height: 24.5px;
+
+  --h2-font-size: 15.75px;
+  --h2-line-height: 24.5px;
+
+  --h3-font-size: 14px;
+  --h3-line-height: 21px;
+
+  /* Mobile Sizes */
+  /* --h1-font-size-mobile: 12.4px;
+  --h1-line-height-mobile: 18.6px;
+
+  --h2-font-size-mobile: 11.5px;
+  --h2-line-height-mobile: 18.6px;
+
+  --h3-font-size-mobile: 10px;
+  --h3-line-height-mobile: 18.6px; */
+}
+
+h1 {
+  font-size: var(--h1-font-size);
+  line-height: var(--h1-line-height);
+}
+
+h2 {
+  font-size: var(--h2-font-size);
+  line-height: var(--h2-line-height);
+}
+
+h3 {
+  font-size: var(--h3-font-size);
+  line-height: var(--h3-line-height);
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+
+  /* h1 {
+    font-size: var(--h1-font-size-mobile);
+    line-height: var(--h1-line-height-mobile);
+  }
+
+  h2 {
+    font-size: var(--h2-font-size-mobile);
+    line-height: var(--h2-line-height-mobile);
+  }
+
+  h3 {
+    font-size: var(--h3-font-size-mobile);
+    line-height: var(--h3-line-height-mobile);
+  }
+    */
+  .silent-scalar-body h1 {
+    text-align: center;
+  }
+}
+
+
+
+/* If the user prefers dark mode, 
+we of course apply color-scheme: dark, as usual */
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: light;
+  }
+}
+
+/* If the user prefers light mode, 
+we still enforce color-scheme: dark, despite the user preference */
+@media (prefers-color-scheme: light) {
+  html {
+    color-scheme: light;
+  }
+}
+
+
+@media screen and (min-width: 640px) {
+  .modal-content {
+    flex-direction: row;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .playmini-destop {
+    display: none;
+  }
+
+  .playmini-mobile {
+    display: block;
+  }
+}
+
+
+.lock span:after {
+  content: '\f023 ';
+  font-family: 'FontAwesome';
+  position: absolute;
+  color: #fff;
+  right: 20px;
+  top: 0px;
+  z-index: 1;
+  font-size: 25px;
+}
+
+.lock {
+  position: relative;
+}
+
+.active {
+  color: #409f83;
+}
+
+details {
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+summary {
+  display: block;
+  position: relative;
+  cursor: pointer;
+}
+
+.summary:before {
+  content: '';
+  border-width: 0.35rem;
+  border-style: solid;
+  border-color: transparent transparent transparent #000;
+  position: absolute;
+  top: 12px;
+  right: 0px;
+  transform: rotate(0);
+  transform-origin: 0.2rem 50%;
+  transition: 0.25s transform ease;
+}
+
+/* THE MAGIC 🧙‍♀️ */
+details[open]>#playlists:before {
+  transform: rotate(90deg);
+}
+
+details[open]>#playlists-child:before {
+  transform: rotate(90deg);
+}
+
+details[open]>#playlists {
+  background-color: #127967;
+}
+
+details[open]>summary:before {
+  transform: rotate(90deg);
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+/* ranger slider */
+input[type='range']::-webkit-slider-thumb {
+  width: 12px;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 12px;
+  cursor: ew-resize;
+  background: #059f83;
+  box-shadow: -405px 0 0 400px #059f83;
+  border-radius: 50%;
+}
+
+.ic-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* hide dots in react slider */
+.slick-dots {
+  display: none !important;
+}
+
+h1,
+h5 {
+  color: black;
+}
+
+input[type='radio'] {
+  accent-color: #059f83;
+}
+
+.skiptranslate span {
+  display: none;
+}
+
+#google_translate_element {
+  line-height: 5.2;
+  outline: none;
+  border: none;
+}
+
+.goog-logo-link {
+  display: none !important;
+}
+
+.goog-te-gadget {
+  color: transparent !important;
+}
+
+.goog-te-gadget .goog-te-combo {
+  color: #d2b96d !important;
+  background: #000;
+  font-size: 0.85rem;
+  border: 1px solid #d2b96d !important;
+  border-radius: 5px;
+  padding: 2px;
+}
+
+.skiptranslate iframe {
+  top: 6%;
+}
+
+.goog-te-gadget .goog-te-combo:focus-visible {
+  outline: none;
+}
+
+.skiptranslate {
+  z-index: 1 !important;
+}
+
+.collapse {
+  overflow: hidden;
+  transition: 0.4s max-height;
+}
+
+.collapse>div {
+  overflow: auto;
+}
+
+/* Targeting scrollbar for WebKit browsers */
+::-webkit-scrollbar {
+  width: 6px;
+  /* Width of the scrollbar */
+}
+
+/* Track (the area where the scrollbar runs) */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  /* Color of the track */
+}
+
+/* Handle (the draggable part of the scrollbar) */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  /* Color of the handle */
+  border-radius: 3px;
+  /* Rounded corners */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+  /* Darker color when hovered */
+}
+
+.switcher input:checked~span:last-child {
+  --tw-translate-x: 1.75rem;
+  /* translate-x-7 */
+}
+
+.scalar-react-select-container .react-select__multi-value {
+  border-radius: 30px;
+  background: #059f83;
+  color: #fff;
+  padding: 3px 5px;
+}
+
+.scalar-react-select-container .react-select__multi-value__label {
+  color: #fff;
+}
+
+.scalar-react-select-container .react-select__multi-value__remove:hover {
+  background-color: inherit;
+  opacity: 0.85;
+  color: #fff;
+}
+
+.scalar-react-select-container .react-select__multi-value__remove svg {
+  border: 1px solid #fff;
+  border-radius: 50%;
+}
+
+.scalar-react-select-container .react-select__option input[type="checkbox"] {
+  transform: scale(1.2);
+}
+
+
+iframe {
+  font-family: 'Montserrat', sans-serif;
+  /* Font-family mặc định cho iframe */
+}
+
+.drag-item:hover {
+  background: linear-gradient(to left, #409f83, lightblue); /* Replace $blue and $lightblue with actual values */
+}
+
+.drag-item:hover *{
+  color: #000;
+}
+
+.dropArea {
+  position: relative;
+  opacity: 0.7;
+}
+
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+

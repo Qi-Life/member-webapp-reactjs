@@ -1,0 +1,63 @@
+.timeline {
+    border-radius: 25px;
+    margin: auto;
+    position: relative;
+    background-color: #D9D9D9;
+    height: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 0;
+}
+
+.timeline-progress {
+    min-width: 15px;
+    z-index: 1;
+    position: absolute;
+    background-color: #297D82;
+    height: 6px;
+    width: 0%;
+    transition: all 0.2s ease;
+}
+
+.timeline-ball {
+    z-index: 2;
+    background-color: #EAEAEA;
+    height: 34px;
+    width: 34px;
+    border: 3px solid #BABABA;
+    border-radius: 50%;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 3px;
+}
+
+.timeline-ball.active {
+    border: none;
+    background-color: #297D82;
+}
+
+.timeline-ball.current {
+    background-color: #fff;
+    border: 3px solid #297D82;
+}
+
+.timeline-ball-text {
+    color: #858585;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.timeline-ball.active .timeline-ball-text {
+    color: #fff;
+}
+
+.timeline-ball.current .timeline-ball-text {
+    color: #297D82;
+}
+
+.CircularProgressbar-text {
+    font-weight: 500;
+}
