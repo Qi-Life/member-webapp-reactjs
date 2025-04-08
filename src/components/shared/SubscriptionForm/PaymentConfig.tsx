@@ -1,4 +1,4 @@
-export const PaymentConfig:any = {
+export const PaymentConfig: any = {
   rifePlan: {
     categoryId: 1,
     description: 'Unlock 10,000 + Rife',
@@ -8,6 +8,8 @@ export const PaymentConfig:any = {
     amount: 8.08,
     monthlyProductId: import.meta.env.VITE_PRODUCT_RIFE_MONTHLY,
     yearlyProductId: import.meta.env.VITE_PRODUCT_RIFE_YEARLY,
+    url: '/payment?paymentPlan=rifePlan',
+    text: 'UNLOCK WITH RIFE'
   },
   quantumPlan: {
     categoryId: 2,
@@ -18,6 +20,8 @@ export const PaymentConfig:any = {
     amount: 24.75,
     monthlyProductId: import.meta.env.VITE_PRODUCT_QUANTUM_MONTHLY,
     yearlyProductId: import.meta.env.VITE_PRODUCT_QUANTUM_YEARLY,
+    url: '/payment?paymentPlan=quantumPlan',
+    text: 'UNLOCK WITH QUANTUM'
   },
   silentQuantumPlan: {
     categoryId: null,
@@ -28,6 +32,8 @@ export const PaymentConfig:any = {
     amount: 41.41,
     monthlyProductId: import.meta.env.VITE_PRODUCT_SCALAR_MONTHLY,
     yearlyProductId: import.meta.env.VITE_PRODUCT_SCALAR_YEARLY,
+    url: '/payment?paymentPlan=silentQuantumPlan',
+    text: 'UNLOCK WITH SILEN QUANTUM'
   },
   silentQuantumProPlan: {
     categoryId: null,
@@ -38,6 +44,8 @@ export const PaymentConfig:any = {
     amount: 41.58,
     monthlyProductId: import.meta.env.VITE_PRODUCT_SCALAR_PRO_MONTHLY,
     yearlyProductId: import.meta.env.VITE_PRODUCT_SCALAR_PRO_YEARLY,
+    url: '/payment?paymentPlan=silentQuantumProPlan',
+    text: 'UNLOCK WITH SILEN QUANTUM PRO'
   },
   silentQuantumAdvancedPlan: {
     categoryId: null,
@@ -56,16 +64,20 @@ export const PaymentConfig:any = {
     monthlyAmount: 3000,
     yealyAmount: 3000,
     amount: 83,
-    lifetimeProductId: import.meta.env.VITE_PRODUCT_HIGHER_QUANTUM_LIFETIME
+    lifetimeProductId: import.meta.env.VITE_PRODUCT_HIGHER_QUANTUM_LIFETIME,
+    url: '/payment?paymentPlan=higherQuantumPlan',
+    text: 'UNLOCK WITH HIGHER QUANTUM'
   },
   advancedQuantumPlan: {
-    categoryId: null,
+    categoryId: 10,
     description: 'Unlock Advanced Quantum LifeTime',
     saveAmount: 167,
     monthlyAmount: 3000,
     yealyAmount: 3000,
     amount: 83,
-    lifetimeProductId: import.meta.env.VITE_PRODUCT_HIGHER_QUANTUM_LIFETIME
+    lifetimeProductId: import.meta.env.VITE_PRODUCT_ADVANCED_QUANTUM_LIFETIME,
+    url: '/payment?paymentPlan=advancedQuantumPlan',
+    text: 'UNLOCK WITH ADVANCED QUANTUM'
   },
   innerCirclePlan: {
     categoryId: null,
@@ -74,7 +86,9 @@ export const PaymentConfig:any = {
     monthlyAmount: 3000,
     yealyAmount: 3000,
     amount: 83,
-    lifetimeProductId: import.meta.env.VITE_PRODUCT_HIGHER_QUANTUM_LIFETIME
+    lifetimeProductId: import.meta.env.VITE_PRODUCT_HIGHER_QUANTUM_LIFETIME,
+    url: '/payment?paymentPlan=innerCirclePlan',
+    text: 'UNLOCK WITH INNER CIRCLE'
   },
 }
 

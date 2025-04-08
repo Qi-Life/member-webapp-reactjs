@@ -22,6 +22,7 @@ import LoadingButton from '~/components/LoadingButton';
 import { toast } from 'react-toastify';
 import BackImage from '~/assets/img/playlist/left.png';
 import { getProfile } from '~/services/ProfileService';
+import { trackFacebookEvent } from '~/helpers/fbq';
 
 interface StripeOptions {
   mode: 'payment';
@@ -105,6 +106,10 @@ const CheckoutForm = (props: any) => {
         setUserAndPasswordLocal(userRes.data)
       })
       navigate('/payment-success', { state: { gobackUrL: props.gobackUrl, appName, ...res.data } });
+      trackFacebookEvent('Purchase', {
+        recurry: props.selectedTime,
+        content_name: paymentPlan.text
+      })
     } catch (error) {
       const err = error as { response: any };
       toast.error(err.response?.data?.data || 'Payment has error')
@@ -171,9 +176,9 @@ function SubscriptionForm(props: any) {
   const [activeIndex, setActiveIndex] = useState(null);
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const packageName = searchParams.get('paymentPlan');  
+  const packageName = searchParams.get('paymentPlan');
   const [paymentPlan, setPaymentPlan] = useState(PaymentConfig[packageName] || PaymentConfig.rifePlan);
-  
+
   const [selectedTime, setSelectedTime] = useState(searchParams.get("recurry") || 'monthly');
   const [isPayment, setIsPayment] = useState(false);
 
@@ -221,9 +226,9 @@ function SubscriptionForm(props: any) {
       return img
     } else if (packageName == 'higherQuantumPlan') {
       return hQuantumImage
-    }else if(packageName == 'advancedQuantumLifetime'){
+    } else if (packageName == 'advancedQuantumLifetime') {
       return adLifetimeImage
-    }else if(packageName == 'innerCircleLifetime'){
+    } else if (packageName == 'innerCircleLifetime') {
       return innerCircleLifetimeImage
     }
     return quantumImage

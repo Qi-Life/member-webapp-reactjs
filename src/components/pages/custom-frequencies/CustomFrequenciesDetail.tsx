@@ -7,7 +7,7 @@ import { AuthContext } from '~/components/context/AppProvider';
 import { FaLock, FaPlus } from 'react-icons/fa';
 import frequencyImage from '~/assets/img/image/frequency.png';
 import LoadingButton from '~/components/LoadingButton';
-import { getAccessToken, getUnlockUrl, isLogined } from '~/helpers/token';
+import { getUnlockUrl, isLogined } from '~/helpers/token';
 import { deleteCustomFrequencies, getCustomFrequenciesDetail, updateCustomFrequencies } from '~/services/CustomFrequencyServices';
 import AddCustomFrequencyModal from './AddCustomFrequencyModal';
 import { TiEdit } from 'react-icons/ti';
@@ -16,6 +16,7 @@ import EditCustomFrequencyModal from './EditCustomFrequencyModal';
 import { IoClose } from 'react-icons/io5';
 import { toast } from 'react-toastify';
 import AudioPlayer from '~/components/shared/Audio/AudioPlayer';
+import { trackFacebookEvent } from '~/helpers/fbq';
 
 const CustomFrequenciesDetail = (props: any) => {
   const { getMyPlaylist, setSearchInput } = useContext(AuthContext);
@@ -31,7 +32,7 @@ const CustomFrequenciesDetail = (props: any) => {
   const audioPlayerRef = useRef(null);
   const [isOpenNewFrequency, setIsOpenNewFrequency] = useState(false);
   const [isOpenEditFrequency, setIsOpenEditFrequency] = useState(false);
-    const [unlockPageInfo, setUnlockPageInfo] = useState(null);
+  const [unlockPageInfo, setUnlockPageInfo] = useState(null);
   
   const getDataPlayInforItem = async () => {
     try {
@@ -106,6 +107,9 @@ const CustomFrequenciesDetail = (props: any) => {
   };
 
   const handleUnlock = () => {
+    trackFacebookEvent('AddToCart', {
+      content_name: unlockPageInfo.text
+    })
     if (!isLogined()) {
       return navigate('/login');
     }

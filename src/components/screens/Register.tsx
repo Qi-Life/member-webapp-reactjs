@@ -7,6 +7,7 @@ import { loginUser, registerUser } from '../../services/AuthServices';
 import { AuthContext } from '../context/AppProvider';
 import LoadingButton from '../LoadingButton';
 import { setAccessToken, setUserAndPasswordLocal } from '~/helpers/token';
+import { trackFacebookEvent } from '~/helpers/fbq';
 
 export default function Register() {
   const navigate = useNavigate();
@@ -58,7 +59,6 @@ export default function Register() {
 
     try {
       const resRegister = await registerUser({ name, email, password });
-      console.log('🚀 ~ file: Register.tsx:56 ~ handleSubmit ~ resRegister:', resRegister);
 
       if (resRegister.data.user[0].fetch_flag != -1) {
         setTimeout(() => {
@@ -67,6 +67,7 @@ export default function Register() {
         setTimeout(() => {
           loginUser({ email, password }).then((res: any) => {
             if (res.data.user[0].token) {
+              trackFacebookEvent('CompleteRegistration');
               setAccessToken(res.data.user[0].token);
               setUserAndPasswordLocal(res.data.user[0]);
               navigate('/starter-frequencies');

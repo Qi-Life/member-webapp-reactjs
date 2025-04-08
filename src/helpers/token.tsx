@@ -1,5 +1,7 @@
 // import { typeUserInfo } from '../interface/user/user.interface';
 
+import { PaymentConfig } from "~/components/shared/SubscriptionForm/PaymentConfig";
+
 export const getToken = (key: string): string | null => localStorage.getItem(key);
 export const setToken = (key: string, value: any) => localStorage.setItem(key, value);
 export const getAccessToken = () => {
@@ -163,31 +165,16 @@ export const getUnlockUrl = (playInforItem: { categoryId: string | number, qilif
   const { categoryId } = playInforItem;
 
   if (!categoryId || categoryId == 1) {
-    return {
-      url: '/payment?paymentPlan=rifePlan',
-      text: 'UNLOCK WITH RIFE'
-    }
+    return PaymentConfig.rifePlan
   } else if (categoryId == 2 || categoryId == 11) {
-    return {
-      url: '/payment?paymentPlan=quantumPlan',
-      text: 'UNLOCK WITH QUANTUM'
-    }
+    return PaymentConfig.quantumPlan
   } else if (categoryId == 3) {
-    return {
-      url: '/payment?paymentPlan=higherQuantumPlan',
-      text: 'UNLOCK WITH HIGHER QUANTUM'
-    }
+    return PaymentConfig.higherQuantumPlan
   } else if (categoryId == 4) {
-    return {
-      url: '/payment?paymentPlan=innerCirclePlan',
-      text: 'UNLOCK WITH INNER CIRCLE'
-    }
+    return PaymentConfig.innerCirclePlan
   }
   else if (categoryId == 10) {
-    return {
-      url: '/payment?paymentPlan=advancedQuantumPlan',
-      text: 'UNLOCK WITH ADVANCED QUANTUM'
-    }
+    return PaymentConfig.advancedQuantumPlan
   }
   else {
     if (playInforItem.qilifestore_url) {

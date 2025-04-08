@@ -18,6 +18,7 @@ import { useAudio } from '~/components/context/AudioProvider';
 import AudioPlayer from '~/components/shared/Audio/AudioPlayer';
 import SearchForm from '~/components/shared/SearchForm';
 import NavigateDropdown from '~/components/shared/Dropdown/NavigateDropdown';
+import { trackFacebookEvent } from '~/helpers/fbq';
 
 const Item = (props: any) => {
   const { getMyPlaylist, setSearchInput, pathName } = useContext(AuthContext);
@@ -217,20 +218,15 @@ const Item = (props: any) => {
     }
   };
 
-  const handleChange = (e: any) => {
-    if (e.target.value === '') {
-      handleEnterSearch(e.target.value);
-      setSearchParams('');
-    } else {
-    }
-    setSearchInput(e.target.value);
-  };
-
   const handleSearch = async (value: string) => {
     handleEnterSearch(value);
   };
 
   const handleUnlock = () => {
+    trackFacebookEvent('AddToCart', {
+      content_name: unlockPageInfo.text
+    })
+
     if (!isLogined()) {
       return navigate('/login');
     }
