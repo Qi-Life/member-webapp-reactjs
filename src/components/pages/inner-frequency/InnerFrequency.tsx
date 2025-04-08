@@ -18,7 +18,7 @@ import { useAudio } from '~/components/context/AudioProvider';
 import AudioPlayer from '~/components/shared/Audio/AudioPlayer';
 import SearchForm from '~/components/shared/SearchForm';
 import NavigateDropdown from '~/components/shared/Dropdown/NavigateDropdown';
-import { trackFacebookEvent } from '~/helpers/fbq';
+import { trackFacebookEvent, trackFacebookEventCustom } from '~/helpers/fbq';
 
 const Item = (props: any) => {
   const { getMyPlaylist, setSearchInput, pathName } = useContext(AuthContext);
@@ -223,7 +223,7 @@ const Item = (props: any) => {
   };
 
   const handleUnlock = () => {
-    trackFacebookEvent('AddToCart', {
+    trackFacebookEventCustom('purchase_click', {
       content_name: unlockPageInfo.text
     })
 

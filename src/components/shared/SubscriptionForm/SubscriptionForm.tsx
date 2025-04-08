@@ -22,7 +22,7 @@ import LoadingButton from '~/components/LoadingButton';
 import { toast } from 'react-toastify';
 import BackImage from '~/assets/img/playlist/left.png';
 import { getProfile } from '~/services/ProfileService';
-import { trackFacebookEvent } from '~/helpers/fbq';
+import { trackFacebookEvent, trackFacebookEventCustom } from '~/helpers/fbq';
 
 interface StripeOptions {
   mode: 'payment';
@@ -106,7 +106,7 @@ const CheckoutForm = (props: any) => {
         setUserAndPasswordLocal(userRes.data)
       })
       navigate('/payment-success', { state: { gobackUrL: props.gobackUrl, appName, ...res.data } });
-      trackFacebookEvent('Purchase', {
+      trackFacebookEventCustom('purchase_success', {
         recurry: props.selectedTime,
         content_name: paymentPlan.text
       })
