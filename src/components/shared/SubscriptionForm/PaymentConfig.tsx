@@ -8,7 +8,7 @@ export const PaymentConfig: any = {
     amount: 8.08,
     monthlyProductId: import.meta.env.VITE_PRODUCT_RIFE_MONTHLY,
     yearlyProductId: import.meta.env.VITE_PRODUCT_RIFE_YEARLY,
-    url: '/payment?paymentPlan=rifePlan',
+    url: 'https://www.qicoil.com/pricing/?q=wellness',
     text: 'UNLOCK WITH RIFE'
   },
   quantumPlan: {
@@ -20,7 +20,7 @@ export const PaymentConfig: any = {
     amount: 24.75,
     monthlyProductId: import.meta.env.VITE_PRODUCT_QUANTUM_MONTHLY,
     yearlyProductId: import.meta.env.VITE_PRODUCT_QUANTUM_YEARLY,
-    url: '/payment?paymentPlan=quantumPlan',
+    url: 'https://www.qicoil.com/pricing/?q=wellness',
     text: 'UNLOCK WITH QUANTUM'
   },
   silentQuantumPlan: {
@@ -32,7 +32,7 @@ export const PaymentConfig: any = {
     amount: 41.41,
     monthlyProductId: import.meta.env.VITE_PRODUCT_SCALAR_MONTHLY,
     yearlyProductId: import.meta.env.VITE_PRODUCT_SCALAR_YEARLY,
-    url: '/payment?paymentPlan=silentQuantumPlan',
+    url: 'https://www.qicoil.com/pricing/?q=wellness',
     text: 'UNLOCK WITH SILEN QUANTUM'
   },
   silentQuantumProPlan: {
@@ -44,18 +44,8 @@ export const PaymentConfig: any = {
     amount: 41.58,
     monthlyProductId: import.meta.env.VITE_PRODUCT_SCALAR_PRO_MONTHLY,
     yearlyProductId: import.meta.env.VITE_PRODUCT_SCALAR_PRO_YEARLY,
-    url: '/payment?paymentPlan=silentQuantumProPlan',
+    url: 'https://www.qicoil.com/pricing/?q=wellness',
     text: 'UNLOCK WITH SILEN QUANTUM PRO'
-  },
-  silentQuantumAdvancedPlan: {
-    categoryId: null,
-    description: 'Unlock Silent Quantum Advanced',
-    saveAmount: 51,
-    monthlyAmount: 109,
-    yealyAmount: 299,
-    amount: 24.75,
-    monthlyProductId: import.meta.env.VITE_PRODUCT_SCALAR_ADVANCED_MONTHLY,
-    yearlyProductId: import.meta.env.VITE_PRODUCT_SCALAR_ADVANCED_YEARLY,
   },
   higherQuantumPlan: {
     categoryId: 3,
@@ -65,7 +55,7 @@ export const PaymentConfig: any = {
     yealyAmount: 3000,
     amount: 83,
     lifetimeProductId: import.meta.env.VITE_PRODUCT_HIGHER_QUANTUM_LIFETIME,
-    url: '/payment?paymentPlan=higherQuantumPlan',
+    url: 'https://www.qicoil.com/pricing/?q=ascension',
     text: 'UNLOCK WITH HIGHER QUANTUM'
   },
   advancedQuantumPlan: {
@@ -76,7 +66,7 @@ export const PaymentConfig: any = {
     yealyAmount: 3000,
     amount: 83,
     lifetimeProductId: import.meta.env.VITE_PRODUCT_ADVANCED_QUANTUM_LIFETIME,
-    url: '/payment?paymentPlan=advancedQuantumPlan',
+    url: 'https://www.qicoil.com/pricing/?q=ascension',
     text: 'UNLOCK WITH ADVANCED QUANTUM'
   },
   innerCirclePlan: {
@@ -87,7 +77,7 @@ export const PaymentConfig: any = {
     yealyAmount: 3000,
     amount: 83,
     lifetimeProductId: import.meta.env.VITE_PRODUCT_HIGHER_QUANTUM_LIFETIME,
-    url: '/payment?paymentPlan=innerCirclePlan',
+    url: 'https://www.qicoil.com/pricing/?q=ascension',
     text: 'UNLOCK WITH INNER CIRCLE'
   },
 }

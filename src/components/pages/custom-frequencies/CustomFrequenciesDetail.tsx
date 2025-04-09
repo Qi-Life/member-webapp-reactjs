@@ -33,7 +33,7 @@ const CustomFrequenciesDetail = (props: any) => {
   const [isOpenNewFrequency, setIsOpenNewFrequency] = useState(false);
   const [isOpenEditFrequency, setIsOpenEditFrequency] = useState(false);
   const [unlockPageInfo, setUnlockPageInfo] = useState(null);
-  
+
   const getDataPlayInforItem = async () => {
     try {
       if (playlistId && cateoryId !== '') {
@@ -118,13 +118,8 @@ const CustomFrequenciesDetail = (props: any) => {
       return navigate('/not-found-subscription')
     }
 
-    if (unlockPageInfo?.out) {
-      window.location.href = unlockPageInfo.url
-    } else {
-      navigate(unlockPageInfo.url, {
-        state: { gobackUrl: window.location.href.replace(window.location.origin, '') },
-      })
-    }
+    window.location.href = unlockPageInfo.url
+
   };
 
   const handleAddCustomFrequency = () => {

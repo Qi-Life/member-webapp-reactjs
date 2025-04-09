@@ -11,7 +11,7 @@ import img1 from '~/assets/img/subscription/trusted-badge-1.png';
 import img2 from '~/assets/img/subscription/trusted-badge-1.jpeg';
 import img3 from '~/assets/img/subscription/jim-c.jpeg';
 
-import { Stripe, loadStripe } from '@stripe/stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { Elements, useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
@@ -22,7 +22,7 @@ import LoadingButton from '~/components/LoadingButton';
 import { toast } from 'react-toastify';
 import BackImage from '~/assets/img/playlist/left.png';
 import { getProfile } from '~/services/ProfileService';
-import { trackFacebookEvent, trackFacebookEventCustom } from '~/helpers/fbq';
+import { trackFacebookEventCustom } from '~/helpers/fbq';
 
 interface StripeOptions {
   mode: 'payment';
@@ -79,7 +79,6 @@ const CheckoutForm = (props: any) => {
       return
     }
 
-    // Send the PaymentMethod ID and payment details to the backend
     let priceId = '';
     if (props.selectedTime === 'monthly') {
       priceId = paymentPlan.monthlyProductId;
@@ -153,15 +152,12 @@ const CheckoutForm = (props: any) => {
           />
         </div>
       </div>
-      {/* <ReCAPTCHA
-        sitekey="6LexQTIpAAAAAL0JKmrXeVcUPkNefB5JZ4s3ShbE"
-      /> */}
       <button
         type="submit"
         disabled={!stripe || !elements || loading}
-        className="w-full bg-[#059f83] text-white rounded-full px-4 py-4 font-bold mt-4"
+        className="w-full bg-[#059f83] text-white text-xl rounded-full px-4 py-4 font-bold mt-4"
       >
-        Join Now
+        Activiy Membership
       </button>
 
       {loading && <LoadingButton />}
@@ -173,7 +169,6 @@ const CheckoutForm = (props: any) => {
 };
 
 function SubscriptionForm(props: any) {
-  const [activeIndex, setActiveIndex] = useState(null);
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const packageName = searchParams.get('paymentPlan');
@@ -265,7 +260,7 @@ function SubscriptionForm(props: any) {
               >
                 Yearly
                 <span className="bg-red-500 text-white text-center rounded-lg text-xs p-1 pl-2 pr-2 ml-4">
-                  Save UpTo ${paymentPlan.saveAmount}
+                  Save ${paymentPlan.saveAmount}
                 </span>
               </button>
             </div>
@@ -290,7 +285,7 @@ function SubscriptionForm(props: any) {
               </b>
             </p>
             <p className="text-sm text-center">
-              <b>Prices in USD.</b>
+              <b>Prices in USD</b>
             </p>
           </div>
 

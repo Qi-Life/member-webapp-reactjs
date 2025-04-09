@@ -234,14 +234,7 @@ const Item = (props: any) => {
     if(!unlockPageInfo){
       return navigate('/not-found-subscription')
     }
-
-    if(unlockPageInfo?.out){
-      window.location.href = unlockPageInfo.url
-    }else{
-      navigate(unlockPageInfo.url, {
-        state: { gobackUrl: window.location.href.replace(window.location.origin, '') },
-      })
-    }
+    window.location.href = unlockPageInfo.url
   };
 
   const handleSelectSilent = (tier: string) => {
