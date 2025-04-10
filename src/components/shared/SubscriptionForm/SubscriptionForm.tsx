@@ -159,7 +159,7 @@ const CheckoutForm = (props: any) => {
         disabled={!stripe || !elements || loading}
         className="w-full bg-[#059f83] text-white text-xl rounded-full px-4 py-4 font-bold mt-4"
       >
-        Activiy Membership
+        Activate Membership
       </button>
 
       {loading && <LoadingButton />}
@@ -326,14 +326,16 @@ function SubscriptionForm(props: any) {
                   }}
                 ></div>
               </div>
-              <div className="w-[75%] pl-5 sm:text-base">
+              <div className="w-[75%] pl-5">
+                {paymentPlan.tab == 1 ? <p><b>🌿 Deep Healing and Inner Peace</b></p> : <p><b>💸 Attracting Abundance Effortlessly</b></p>}
                 <p className="">
                   {
-                    paymentPlan.tab == 1 ? "I was skeptical, but using the Qi Coil for just 20 minutes a day has reduced my pain and helped me feel like myself again."
-                      : "The frequencies help me stay balanced and focused throughout the day. I’ve never felt so aligned and productive!"
+                    paymentPlan.tab == 1 ? '"I\'ve tried countless healing modalities over the years, but nothing has worked as deeply and effortlessly as these Qi Coil frequencies. Within a few days, I noticed my sleep improved, my anxiety decreased, and my body just felt like it was finally coming back into balance. It feels like my cells are being reprogrammed for health. Truly life-changing."'
+                      : ' "I was skeptical at first, but after consistently using the abundance frequencies for just a few weeks, unexpected opportunities started flowing in. I landed a new client, received a surprise bonus, and even started attracting more aligned people into my life. These frequencies are like tuning into a new reality."'
                   }
                 </p>
-                {paymentPlan.tab == 1 ? <span><b>Rachel L.</b>, Wellness Coach</span> : <span><b>Jason M.</b>, Engineer</span>}
+                {paymentPlan.tab == 1 ? <span>—<b> Jessica R., Verified Subscriber</b></span> : <span>—<b> Marcus T., Verified Subscriber</b></span>
+                }
               </div>
             </div>
           </div>
