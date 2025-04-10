@@ -11,7 +11,7 @@ import ReactPaginate from 'react-paginate';
 import ScrollToTop from '~/components/ScrollToTop';
 import { AuthContext } from '~/components/context/AppProvider';
 import LazyImage from '~/components/shared/LazyImage';
-import { checkLockAlbum, isLogined } from '~/helpers/token';
+import { checkLockAlbum, getUnlockUrl, isLogined } from '~/helpers/token';
 import NoResults from '~/components/NoResult';
 import SearchForm from '~/components/shared/SearchForm';
 
@@ -56,7 +56,6 @@ const Frequencies = () => {
         subCategoryQuery = null;
       }
       const res = await getFrequencies(keyword, categoryIdArray, subCategoryQuery, pageNumber, id, limit);
-      console.log("🚀 ~ getDataFrequencies ~ res:", res)
       
       if (res?.data?.frequencies === null) {
         setDataFrequencies([]);
@@ -111,25 +110,8 @@ const Frequencies = () => {
   const handleClickPlayItem = (item: any) => {
     let categoryId = item.categoryId || 1
     if (checkLockAlbum(item) && !isLogined()) {
-      if (!categoryId || categoryId == 1) {
-        navigate('/payment?paymentPlan=rifePlan', {
-          state: { gobackUrl: window.location.href.replace(window.location.origin, '') },
-        });
-      } else if (categoryId == 2) {
-        navigate('/payment?paymentPlan=quantumPlan', {
-          state: { gobackUrl: window.location.href.replace(window.location.origin, '') },
-        });
-      } else if (categoryId == 3) {
-        navigate('/payment?paymentPlan=higherQuantumPlan', {
-          state: { gobackUrl: window.location.href.replace(window.location.origin, '') },
-        });
-      } else {
-        if (item.qilifestore_url) {
-          window.location.href = item.qilifestore_url;
-        } else {
-          navigate('/not-found-subscription')
-        }
-      }
+      const unlockPageInfo = getUnlockUrl(item) 
+      window.location.href = unlockPageInfo.url
     } else {
       navigate(`/inner_frequencies?id=${item.id}&category=${categoryId}`);
     }

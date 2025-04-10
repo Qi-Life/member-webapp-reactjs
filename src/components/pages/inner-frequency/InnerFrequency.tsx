@@ -223,9 +223,9 @@ const Item = (props: any) => {
   };
 
   const handleUnlock = () => {
-    trackFacebookEventCustom('purchase_click', {
-      content_name: unlockPageInfo.text
-    })
+    // trackFacebookEventCustom('purchase_click', {
+    //   content_name: unlockPageInfo.text
+    // })
 
     if (!isLogined()) {
       return navigate('/login');
