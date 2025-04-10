@@ -317,8 +317,8 @@ function SubscriptionForm(props: any) {
               </p>
             </div>
             <hr className="my-5 border-t border-gray-300" />
-            <div className="flex">
-              <div className="w-[25%]">
+            <div className="flex items-center">
+              <div className="sm:w-[25%]">
                 <div
                   className="rounded-full bg-cover bg-center w-32 h-32"
                   style={{
@@ -326,7 +326,7 @@ function SubscriptionForm(props: any) {
                   }}
                 ></div>
               </div>
-              <div className="w-[75%] pl-5 text-base">
+              <div className="w-[75%] pl-5 sm:text-base">
                 <p className="">
                   {
                     paymentPlan.tab == 1 ? "I was skeptical, but using the Qi Coil for just 20 minutes a day has reduced my pain and helped me feel like myself again."
