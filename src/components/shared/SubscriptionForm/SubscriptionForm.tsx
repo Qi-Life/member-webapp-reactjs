@@ -10,6 +10,8 @@ import innerCircleLifetimeImage from '~/assets/img/subscription/inner_circle_lev
 import img1 from '~/assets/img/subscription/trusted-badge-1.png';
 import img2 from '~/assets/img/subscription/trusted-badge-1.jpeg';
 import img3 from '~/assets/img/subscription/jim-c.jpeg';
+import heathyImage from '~/assets/img/subscription/heathy_people.jpg';
+import wellNessImage from '~/assets/img/subscription/wellness_people.jpg';
 
 import { loadStripe } from '@stripe/stripe-js';
 import { useNavigate, useSearchParams } from 'react-router-dom';
@@ -317,15 +319,21 @@ function SubscriptionForm(props: any) {
             <hr className="my-5 border-t border-gray-300" />
             <div className="flex">
               <div className="w-[25%]">
-                <img src={img3} alt="Hallie Cowan" className="rounded-full w-full" />
+                <div
+                  className="rounded-full bg-cover bg-center w-32 h-32"
+                  style={{
+                    backgroundImage: `url(${paymentPlan.tab == 1 ? wellNessImage : heathyImage})`,
+                  }}
+                ></div>
               </div>
-
               <div className="w-[75%] pl-5 text-base">
                 <p className="">
-                  I eliminated a daunting amount debt with Qi Coils &amp; Inner Circle Frequencies. My mental energy
-                  became different completely after using this Qi Coil
+                  {
+                    paymentPlan.tab == 1 ? "I was skeptical, but using the Qi Coil for just 20 minutes a day has reduced my pain and helped me feel like myself again."
+                      : "The frequencies help me stay balanced and focused throughout the day. I’ve never felt so aligned and productive!"
+                  }
                 </p>
-                <span className="font-bold">Jim C,</span> Qi Coil App User
+                {paymentPlan.tab == 1 ? <span><b>Rachel L.</b>, Wellness Coach</span> : <span><b>Jason M.</b>, Engineer</span>}
               </div>
             </div>
           </div>

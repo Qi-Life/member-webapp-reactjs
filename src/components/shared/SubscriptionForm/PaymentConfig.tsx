@@ -1,5 +1,6 @@
 export const PaymentConfig: any = {
   rifePlan: {
+    tab: 1,
     categoryId: 1,
     description: 'Unlock 10,000 + Rife',
     saveAmount: 49.89,
@@ -12,6 +13,7 @@ export const PaymentConfig: any = {
     text: 'UNLOCK WITH RIFE'
   },
   quantumPlan: {
+    tab: 1,
     categoryId: 2,
     description: 'Unlock 822 + Quantum',
     saveAmount: 127,
@@ -24,6 +26,7 @@ export const PaymentConfig: any = {
     text: 'UNLOCK WITH QUANTUM'
   },
   silentQuantumPlan: {
+    tab: 1,
     categoryId: null,
     description: 'Unlock Silent Quantum',
     saveAmount: 51,
@@ -36,6 +39,7 @@ export const PaymentConfig: any = {
     text: 'UNLOCK WITH SILEN QUANTUM'
   },
   silentQuantumProPlan: {
+    tab: 1,
     categoryId: null,
     description: 'Unlock Silent Quantum Pro',
     saveAmount: 89,
@@ -48,6 +52,7 @@ export const PaymentConfig: any = {
     text: 'UNLOCK WITH SILEN QUANTUM PRO'
   },
   higherQuantumPlan: {
+    tab: 2,
     categoryId: 3,
     description: 'Unlock  197 + Higher Quantum',
     saveAmount: 167,
@@ -59,6 +64,7 @@ export const PaymentConfig: any = {
     text: 'UNLOCK WITH HIGHER QUANTUM'
   },
   advancedQuantumPlan: {
+    tab: 2,
     categoryId: 10,
     description: 'Unlock Advanced Quantum LifeTime',
     saveAmount: 167,
@@ -70,6 +76,7 @@ export const PaymentConfig: any = {
     text: 'UNLOCK WITH ADVANCED QUANTUM'
   },
   innerCirclePlan: {
+    tab: 2,
     categoryId: null,
     description: 'Unlock Inner Circle LifeTime',
     saveAmount: 167,
