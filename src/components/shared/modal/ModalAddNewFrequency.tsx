@@ -26,11 +26,7 @@ const customStyles = {
     }),
 };
 
-let unlocked_categories = localStorage.getItem('category_ids') ? localStorage.getItem('category_ids').split(',').map(item => +item) : []
 
-unlocked_categories = unlocked_categories.concat(7)
-const unlocked_subcategories = localStorage.getItem('subcategory_ids') ? localStorage.getItem('subcategory_ids').split(',').map(item => +item) : []
-const unlocked_albums = localStorage.getItem('albums') ? JSON.parse(localStorage.getItem('albums')).map((item: any) => item.id) : []
 
 const SelectCategory = ({ onChangeQueryTracks, isOpenNewFrequency, statusButton, categoryOptions, subCategories }: any) => {
     const [subCategoryOptions, setSubCategoryOptions] = useState<any>([]);
@@ -38,6 +34,8 @@ const SelectCategory = ({ onChangeQueryTracks, isOpenNewFrequency, statusButton,
     const [subCategorySelected, setSubCategorySelected] = useState({ 'label': 'Select a subcategory', value: null })
     const [albumSelected, setAlbumSelected] = useState({ 'label': 'Select an album', value: null })
     const [albumOptions, setAlbumOptions] = useState<any>([]);
+    
+    const unlocked_subcategories = localStorage.getItem('subcategory_ids') ? localStorage.getItem('subcategory_ids').split(',').map(item => +item) : []
 
 
     const fetAlbums = async (inputValue: string = '') => {
@@ -118,7 +116,6 @@ const SelectCategory = ({ onChangeQueryTracks, isOpenNewFrequency, statusButton,
         }
     }, [isOpenNewFrequency])
 
-    console.log("categoryOptions", categoryOptions)
     return (
         <div className=''>
             <div className='flex justify-between items-center gap-5 relative'>
@@ -175,6 +172,12 @@ const ModalAddNewFrequency = (props: any) => {
     const [defaultOptions, setDefaultOptions] = useState([]); // Default options for AsyncSelect
     const [categoryOptions, setCategoryOptions] = useState<any>([]);
     const [subCategories, setsubCategories] = useState<any>([]);
+
+    let unlocked_categories = localStorage.getItem('category_ids') ? localStorage.getItem('category_ids').split(',').map(item => +item) : []
+
+    unlocked_categories = unlocked_categories.concat(7)
+    const unlocked_subcategories = localStorage.getItem('subcategory_ids') ? localStorage.getItem('subcategory_ids').split(',').map(item => +item) : []
+    const unlocked_albums = localStorage.getItem('albums') ? JSON.parse(localStorage.getItem('albums')).map((item: any) => item.id) : []
 
     const initialSubCat = async () => {
         try {
