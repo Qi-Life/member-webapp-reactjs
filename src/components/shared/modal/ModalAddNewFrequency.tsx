@@ -39,6 +39,7 @@ const SelectCategory = ({ onChangeQueryTracks, isOpenNewFrequency, statusButton,
     const [albumSelected, setAlbumSelected] = useState({ 'label': 'Select an album', value: null })
     const [albumOptions, setAlbumOptions] = useState<any>([]);
 
+
     const fetAlbums = async (inputValue: string = '') => {
         let albumsRes = await getFrequencies(inputValue, categorySelected?.value, subCategorySelected?.value)
         const albumOptions = albumsRes.data.frequencies.map((item: any) => {
@@ -117,6 +118,7 @@ const SelectCategory = ({ onChangeQueryTracks, isOpenNewFrequency, statusButton,
         }
     }, [isOpenNewFrequency])
 
+    console.log("categoryOptions", categoryOptions)
     return (
         <div className=''>
             <div className='flex justify-between items-center gap-5 relative'>
@@ -163,6 +165,7 @@ const ModalAddNewFrequency = (props: any) => {
         setStatusButton,
     } = useContext(AuthContext);
     const search = useLocation().search;
+    const location = useLocation();
     const [isLoading, setLoading] = useState(false)
     const [addedItem, setAddedItem] = useState(undefined);
     const [isValid, setIsValid] = useState(true);
@@ -176,6 +179,7 @@ const ModalAddNewFrequency = (props: any) => {
     const initialSubCat = async () => {
         try {
             const categoryRes = await getAllCategories();
+            
             const categoryOptionValues = categoryRes.data.categories.filter((item: any) => item.id != 1 && unlocked_categories.includes(+item.id))
                 .map((item: any) => {
                     return { value: item.id, label: item.name }
@@ -286,7 +290,7 @@ const ModalAddNewFrequency = (props: any) => {
         fetchMp3s();
         getFrequencies();
         initialSubCat()
-    }, []);
+    }, [location.pathname]);
 
 
     const fetchMp3s = async (inputValue: string = '') => {
@@ -368,6 +372,7 @@ const ModalAddNewFrequency = (props: any) => {
         fetchMp3s()
     }, [subcat])
 
+
     return (
         <div
             onClick={(e) => handleOverlayClick(e)}
@@ -416,7 +421,7 @@ const ModalAddNewFrequency = (props: any) => {
 
                     <div className="relative inline-block  w-full  mb-3">
                         {isLoading && <LoadingButton size={20} />}
-                        {statusButton == 'album' && !isLoading &&
+                        {statusButton == 'album' &&
                             <div className='p-2'>
                                 <SelectCategory 
                                     onChangeQueryTracks={onChangeQueryTracks} 
@@ -434,7 +439,7 @@ const ModalAddNewFrequency = (props: any) => {
                                     styles={customStyles} />
                             </div>
                         }
-                        {statusButton == 'rife' && !isLoading && <AsyncSelect onChange={onchangeRife} loadOptions={rifePromiseOptions} cacheOptions defaultOptions />}
+                        {statusButton == 'rife' && <AsyncSelect onChange={onchangeRife} loadOptions={rifePromiseOptions} cacheOptions defaultOptions />}
                         {statusButton == 'custom' && <div className="border-2 flex items-center w-full h-[34px] rounded-md overflow-hidden">
                             <input
                                 value={addedItem}

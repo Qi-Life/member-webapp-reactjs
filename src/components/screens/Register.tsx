@@ -1,7 +1,7 @@
 import React, { FormEvent, useState, useContext } from 'react';
 // import ReCAPTCHA from 'react-google-recaptcha';
 import { useNavigate } from 'react-router-dom';
-import freeFrequencyBundles from '../../assets/img/image/free_frequency_bundles.png';
+import freeFrequencyBundles from '../../assets/img/image/free_frequency_bundles.jpg';
 import Head from '../shared/Head';
 import { loginUser, registerUser } from '../../services/AuthServices';
 import { AuthContext } from '../context/AppProvider';
@@ -102,7 +102,7 @@ export default function Register() {
               <h1 className="text-2xl font-bold leading-tight tracking-tight text-center text-[#059f83] md:text-2xl">
                 Sign Up For a Free Account
               </h1>
-              <h2 className="text-xl text-[#059f83] text-center">Get 7 Meditation Frequencies FREE ($197 Value)</h2>
+              <h2 className="text-xl text-[#059f83] text-center">Get 8 Meditation Frequencies FREE ($197 Value)</h2>
               <h2 className="text-xl text-[#059f83] text-center">Search 10,000+ Rife Frequencies FREE</h2>
               <img
                 src={freeFrequencyBundles}

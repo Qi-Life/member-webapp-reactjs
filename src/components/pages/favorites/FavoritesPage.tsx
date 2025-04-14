@@ -144,7 +144,7 @@ const FavoritesPage = () => {
       <div>
         <div className="hidden md:block">
           <div className="flex justify-between px-4">
-            <h1 className="text-xl font-medium">Favortites</h1>
+            <h1 className="text-xl font-medium">Favorites</h1>
             <div className="flex w-1/3 border items-center bg-white rounded-md pl-2 h-[34px]">
               <SearchIcon w="16" h="16" />
               <input
@@ -213,7 +213,7 @@ const FavoritesPage = () => {
           </div>
         </div>
       </div>
-      <h1 className="text-xl text-center font-medium block md:hidden">Favortites</h1>
+      <h1 className="text-xl text-center font-medium block md:hidden">Favorites</h1>
       {loading ? (
         <>
           <LoadingButton />
