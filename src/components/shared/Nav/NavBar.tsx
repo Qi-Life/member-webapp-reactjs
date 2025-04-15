@@ -156,6 +156,7 @@ function PrimaryNavbar() {
     </div>
   );
 }
+
 function MenuChildren(props: any) {
   const navigate = useNavigate();
   const { isOpenChild } = props;
@@ -348,11 +349,6 @@ function MobileMenuButton() {
             size={32}
             className={`${statusUser ? 'text-clgreen' : 'text-white'}  hover:text-clgreen duration-300`}
           />
-          {/* <div
-          className={`${
-            statusUser ? 'opacity-100' : 'opacity-0 invisible'
-          } h-2 w-2 bg-white absolute top-7 right-2 rotate-[135deg]  duration-200 ease-linear`}
-        ></div> */}
           <div
             className={`${statusUser ? 'opacity-100' : 'opacity-0 invisible'
               } before:block before:absolute before:w-2 before:h-2 before:rotate-[135deg]	 before:bg-white before:right-3 before:top-8 `}
@@ -388,12 +384,9 @@ type MobileMenuProps = {
   setIsOpenChild?: any;
 };
 
-function MobileMenu({ isOpen, isOpenChild, setIsOpenChild }: MobileMenuProps) {
+function MobileMenu({ isOpen }: MobileMenuProps) {
   const { setIsMenuOpen, handleOverlayClick } = useContext(AuthContext);
   const location = useLocation();
-  const handleClickUserMobile = () => {
-    setIsOpenChild(!isOpenChild);
-  };
 
   useEffect(() => {
     if (isOpen) {
@@ -403,28 +396,10 @@ function MobileMenu({ isOpen, isOpenChild, setIsOpenChild }: MobileMenuProps) {
 
   return (
     <div
-      className={`bg-black duration-300 ease-linear absolute z-10 shadow-lg text-center w-full md:hidden  
+      className={`bg-black duration-300 ease-linear absolute z-10 shadow-lg text-center w-full lg:hidden  
       ${isOpen ? `  visible overflow-y-clip h-[260px]  ` : 'invisible overflow-hidden  h-0'} `}
     >
       <ul>{navItemsMobile(true)}</ul>
-      {/* <div className="">
-        <div className={`flex items-center justify-center ml-2 shadow-md h-full`}>
-          {getAccessToken() === '' || getAccessToken() === null ? (
-            <></>
-          ) : (
-            <div
-              onClick={() => handleClickUserMobile()}
-              className="bg-[#059f83] relative w-10 h-10 rounded-full flex items-center justify-center cursor-pointer "
-            >
-              <span className="text-white font-bold text-[10px]">
-                {getInfoUser() === null ? '' : getInfoUser()?.slice(0, 3)?.toUpperCase()}
-              </span>
-              <DownIcon />
-              <MenuChildren isOpenChild={isOpenChild} />
-            </div>
-          )}
-        </div>
-      </div> */}
       <div
         onClick={(e) => handleOverlayClick(e)}
         className="h-[calc(100vh-55px)] w-screen bg-black fixed top-[55px] -z-20 bg-opacity-30"
@@ -453,17 +428,8 @@ function NavContainer({ children, isMenuOpen, setIsOpenChild, isOpenChild }: Nav
 }
 
 export default function NavBar() {
-  const { isMenuOpen, isOpenChild, setIsOpenChild, setIsMenuOpen } = useContext(AuthContext);
+  const { isMenuOpen, isOpenChild, setIsOpenChild } = useContext(AuthContext);
   const location = useLocation();
-
-  // useEffect(() => {
-  //   if (getAccessToken() !== null || getAccessToken() !== '' || typeof getAccessToken() !== 'undefined') {
-  //     const joinNowIndex = navigation.findIndex((item) => item.name === 'Login');
-  //     if (joinNowIndex !== -1) {
-  //       navigation = navigation.filter((item) => item.name !== 'Login');
-  //     }
-  //   }
-  // }, [getAccessToken()]);
 
   useEffect(() => {
     getUser()
