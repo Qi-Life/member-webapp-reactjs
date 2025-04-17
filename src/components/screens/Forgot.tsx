@@ -75,38 +75,42 @@ export default function Forgot() {
       <section className="bg-white min-h-screen pt-[120px]">
         <div className="flex flex-col items-center px-2 py-8 mx-auto md:h-screen lg:py-0">
           <div className="w-full md:mt-0 sm:max-w-xl ">
-            <div className=" space-y-4 md:space-y-6 sm:p-8">
-              <h1 className="text-2xl  text-center font-medium leading-tight tracking-tight text-gray-900 sm:text-3xl">
+            <div className="gap-[2.313rem] flex flex-col items-center">
+              <h1 className="text-[2rem] text-center font-semibold leading-tight tracking-tight text-[#000000] sm:text-3xl">
                 Reset Your Password
               </h1>
-
-              <form className="space-y-8 md:space-y-6" onSubmit={handleSubmit}>
+              <form
+                className="space-y-[0.625rem] w-auto md:w-[27.375rem] bg-[#C5E9ED] p-[1.25rem] rounded-[0.875rem]"
+                onSubmit={handleSubmit}
+              >
+                <label htmlFor="email" className="text-[1rem] text-[#000000] font-medium">
+                  Your email address
+                </label>
                 <input
                   type="email"
                   name="email"
                   id="email"
-                  className=" text-gray-900 dark:bg-inherit placeholder:text-gray-900 placeholder:font-medium outline-none border-b-2 border-[#059F83] sm:text-sm  block w-full p-2.5 h-[34px] "
-                  placeholder="Your email address"
+                  className=" text-gray-900 rounded-md dark:bg-inherit placeholder:text-gray-900 placeholder:font-medium outline-none sm:text-sm  block w-full p-2.5 h-[3rem] "
                   value={email}
                   onChange={(e) => handleChange(e)}
                 />
-                {notification && <p className="text-red-500 text-center font-semibold !mt-2">{notification}</p>}
+                {notification && <p className="text-[#ED3E4E] text-[0.75rem]">{notification}</p>}
 
                 <button
                   disabled={notification !== ''}
                   type="submit"
-                  className=" w-full sm:h-[63px]  text-xl sm:text-[28px] font-semibold text-white bg-[#059f83] mx-auto  flex items-center justify-center hover:bg-primary-700  rounded-lg  py-2.5 text-center"
+                  className=" !mt-[1.563rem] text-[1.25rem]  text-white bg-[#00565B] mx-auto  flex items-center justify-center hover:bg-primary-700  rounded-lg py-2  px-3.5 text-center"
                 >
                   {loading ? <LoadingButton /> : <></>}
-                  <span className="ml-2">Reset My Password</span>
+                  <span className="">Reset my password</span>
                 </button>
-                <p className="text-sm text-center font-medium  text-[#059f83]">
-                  Already have an account?{' '}
-                  <Link to="/login" className="font-semibold text-primary-600 underline">
-                    Login
-                  </Link>
-                </p>
               </form>
+              <p className="text-[1rem] text-center font-medium  text-[#000000]">
+                Already have an account?{' '}
+                <Link to="/login" className="font-semibold text-[#6C5E0D] underline">
+                  Sign In
+                </Link>
+              </p>
               {/* <form onSubmit={handleSubmit}>
                 <label htmlFor="email">Email:</label>
                 <input type="email" id="email" name="email" required />
