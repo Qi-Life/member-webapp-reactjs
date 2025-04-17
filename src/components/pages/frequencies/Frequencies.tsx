@@ -4,12 +4,11 @@ import { useLocation, useNavigate, useParams, useSearchParams } from 'react-rout
 import FilterIcon from '~/components/shared/Icons/FilterIcon';
 import { FaLock, FaSpinner } from 'react-icons/fa';
 import SideBarMenuModal from '../../shared/SidebarMenu/SideBarMenuModal';
-import { debounce } from 'lodash';
 import frequencyImage from '~/assets/img/image/frequency.png';
 import LoadingButton from '~/components/LoadingButton';
 import ReactPaginate from 'react-paginate';
 import ScrollToTop from '~/components/ScrollToTop';
-import { AuthContext } from '~/components/context/AppProvider';
+import { AppContext } from '~/components/context/AppProvider';
 import LazyImage from '~/components/shared/LazyImage';
 import { checkLockAlbum, getUnlockUrl, isLogined } from '~/helpers/token';
 import NoResults from '~/components/NoResult';
@@ -18,7 +17,7 @@ import SearchForm from '~/components/shared/SearchForm';
 const Frequencies = () => {
   const navigate = useNavigate();
   const search = useLocation().search;
-  const { statusScrollTop, setStatusScrollTop, setShowModal, setPathName } = useContext(AuthContext);
+  const { statusScrollTop, setStatusScrollTop, setShowModal, setPathName } = useContext(AppContext);
   const location = useLocation();
   const sort = new URLSearchParams(search).get('sort');
   const { categoryIdParam, subcategoryIdparam } = useParams();

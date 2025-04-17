@@ -1,14 +1,27 @@
 import React from 'react';
-// eslint-disable-next-line no-redeclare
 
-const DownIcon = () => {
-  return (
-    <div className="ml-0.5 mb-1">
-      <svg className="w-[10px] h-[10px] fill-black" viewBox="0 0 576 512" xmlns="http://www.w3.org/2000/svg">
-        <path d="M182.6 470.6c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-9.2-9.2-11.9-22.9-6.9-34.9s16.6-19.8 29.6-19.8H288c12.9 0 24.6 7.8 29.6 19.8s2.2 25.7-6.9 34.9l-128 128z" />
-      </svg>
-    </div>
-  );
+interface DownIconProps {
+    width?: string;
+    height?: string;
+    fillColor?: string;
+    className?: string;
+}
+
+const DownIcon: React.FC<DownIconProps> = ({
+    width = 'w-[10px]',
+    height = ' h-[10px]',
+    fillColor = 'fill-black',
+    className = '',
+}) => {
+    return (
+        <div className={`${className}`}>
+            <svg className={`${width} ${height} ${fillColor}`}  viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11.2841 1.69827L6.69827 6.28405C6.31262 6.6697 5.68737 6.6697 5.30173 6.28405L0.715944 1.69827C0.0938537 1.07618 0.534445 0.0125002 1.41421 0.0125002L10.5858 0.0124998C11.4656 0.0124997 11.9061 1.07618 11.2841 1.69827Z" fill="white" stroke="#424847" stroke-width="0.025" />
+            </svg>
+
+        </div>
+    );
 };
+
 
 export default DownIcon;

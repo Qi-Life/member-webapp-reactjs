@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAudio } from '~/components/context/AudioProvider';
-import { getDataCategory } from '~/helpers/token';
-import { AuthContext } from '~/components/context/AppProvider';
+import { AppContext } from '~/components/context/AppProvider';
 import { toast } from 'react-toastify';
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -48,7 +47,7 @@ const Switcher = (props: SwitcherInterface) => {
 
 export default function AdvancedMode({ handleClickLink }: any) {
     const { handleShowAdvancedMode, isShowAdvancedMode, isPlayScalar } = useAudio()
-    const { isPremium } = useContext(AuthContext);
+    const { isPremium } = useContext(AppContext);
     const location = useLocation(); // Get the current location
 
     const navigate = useNavigate()

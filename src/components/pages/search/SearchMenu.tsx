@@ -5,12 +5,12 @@ import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 import FilterIcon from '~/components/shared/Icons/FilterIcon';
 import SideBarMenuModal from '../../shared/SidebarMenu/SideBarMenuModal';
 import LoadingButton from '~/components/LoadingButton';
-import { AuthContext } from '~/components/context/AppProvider';
+import { AppContext } from '~/components/context/AppProvider';
 import SearchForm from '~/components/shared/SearchForm';
 
 const SearchMenu = () => {
   const search = useLocation().search;
-  const { setShowModal } = useContext(AuthContext);
+  const { setShowModal } = useContext(AppContext);
   const location = useLocation();
   const sort = new URLSearchParams(search).get('sort');
   const { categoryIdParam, subcategoryIdparam } = useParams();

@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-do
 import left from '~/assets/img/playlist/left.png';
 import photoItem from '~/assets/img/custom_playlist.jpeg';
 import DropdownButton from '~/components/shared/Dropdown/Dropdown';
-import { AuthContext } from '~/components/context/AppProvider';
+import { AppContext } from '~/components/context/AppProvider';
 import { getFrequencies } from '~/services/FrequencyServices';
 import { FaLock } from 'react-icons/fa';
 import { getTrack, getFrequencyDetail } from '~/services/InnerFrequenciesServices';
@@ -21,13 +21,13 @@ import NavigateDropdown from '~/components/shared/Dropdown/NavigateDropdown';
 import { trackFacebookEvent, trackFacebookEventCustom } from '~/helpers/fbq';
 
 const Item = (props: any) => {
-  const { getMyPlaylist, setSearchInput, pathName } = useContext(AuthContext);
+  const { getMyPlaylist, setSearchInput, pathName } = useContext(AppContext);
   const {
     playIndex,
     playlistId,
     isPlay, isLoading, setIsPlayType, isShowAdvancedMode
   } = useAudio();
-  const { dataMyPlaylist } = useContext(AuthContext);
+  const { dataMyPlaylist } = useContext(AppContext);
 
   const { search } = useLocation();
 
@@ -35,7 +35,6 @@ const Item = (props: any) => {
   const cateoryId = String(new URLSearchParams(search).get('category') ?? '');
   const type = String(new URLSearchParams(search).get('type') ?? null);
 
-  const [, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const [isOpenPlayList, setOpenPlayList] = useState(false);
   const [num, setNum] = useState(0);
@@ -285,7 +284,7 @@ const Item = (props: any) => {
   }, [playIndex, isLoading, isPlay, tracks, playlistId])
 
   return (
-    <div className="w-full mt-[80px] pb-[50px]">
+    <div className="w-full pb-[50px]">
       <Head title={playInforItem?.name || playInforItem?.title} />
       {loading ? (
         <>
@@ -356,7 +355,7 @@ const Item = (props: any) => {
               </div>
             </div>
             <div className="w-full px-6 text-[#333] lg:w-1/2 float-left pb-5">
-              <div className="bg-[#ECF5F4] rounded-md p-4 md:p-8">
+              <div className="rounded-md p-4 md:p-8">
                 <div className={`mb-2 ${isShowAdvancedMode ? 'flex justify-between flex-wrap gap-2 ' : 'text-right '}`}>
                   {
                     isShowAdvancedMode && SilentDropdown()

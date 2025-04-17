@@ -19,7 +19,7 @@ import ListItemAnimation from '../ListItem/ListItemAnimation';
 import AudioMultiPlayer from './AudioMultiPlayer';
 import ListItemAnimationMobile from '../ListItem/ListItemAnimationMobile';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '~/components/context/AppProvider';
+import { AppContext } from '~/components/context/AppProvider';
 import { isLogined } from '~/helpers/token';
 
 declare global {
@@ -56,7 +56,7 @@ const AudioPlayerMini = forwardRef((props: any, ref: any) => {
   } = useAudio();
 
 
-  const { isPremium } = useContext(AuthContext);
+  const { isPremium } = useContext(AppContext);
   const [isShowMiniPath, setShowMiniPath] = useState(false)
   const [isShowScalar, setIsShowScalar] = useState(false)
 

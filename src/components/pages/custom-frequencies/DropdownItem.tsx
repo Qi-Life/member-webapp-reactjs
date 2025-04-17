@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef, ReactNode, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { AuthContext } from '~/components/context/AppProvider';
+import { AppContext } from '~/components/context/AppProvider';
 import { updateCustomFrequencies } from '~/services/CustomFrequencyServices';
 
 interface DropdownProps {

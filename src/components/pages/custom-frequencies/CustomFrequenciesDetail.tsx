@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-do
 
 import SearchIcon from '~/components/shared/Icons/SearchIcon';
 import left from '~/assets/img/playlist/left.png';
-import { AuthContext } from '~/components/context/AppProvider';
+import { AppContext } from '~/components/context/AppProvider';
 import { FaLock, FaPlus } from 'react-icons/fa';
 import frequencyImage from '~/assets/img/image/frequency.png';
 import LoadingButton from '~/components/LoadingButton';
@@ -19,7 +19,7 @@ import AudioPlayer from '~/components/shared/Audio/AudioPlayer';
 import { trackFacebookEvent, trackFacebookEventCustom } from '~/helpers/fbq';
 
 const CustomFrequenciesDetail = (props: any) => {
-  const { getMyPlaylist, setSearchInput } = useContext(AuthContext);
+  const { getMyPlaylist, setSearchInput } = useContext(AppContext);
   const search = useLocation().search;
   const playlistId = String(new URLSearchParams(search).get('id') ?? '');
   const cateoryId = String(new URLSearchParams(search).get('category') ?? '');

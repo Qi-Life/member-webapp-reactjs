@@ -1,6 +1,6 @@
 import { ReactNode, useContext } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { AuthContext } from '~/components/context/AppProvider';
+import { AppContext } from '~/components/context/AppProvider';
 
 
 function navLinkClasses(isActive: boolean, isMobile: boolean) {
@@ -25,7 +25,7 @@ type NavItemProps = {
 
 export default function NavItem({ children, href, isMobile = false, target, isExternal = false }: NavItemProps) {
   const location = useLocation();
-  const { setIsMenuOpen } = useContext(AuthContext);
+  const { setIsMenuOpen } = useContext(AppContext);
   const isActive = href === location.pathname;
 
   const item = isExternal ? <a href={href} rel="noopener" className={navLinkClasses(isActive, isMobile)}>

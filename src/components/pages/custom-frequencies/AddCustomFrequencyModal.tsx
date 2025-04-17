@@ -1,11 +1,11 @@
 import React, { useContext, useState, useRef, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { AuthContext } from '~/components/context/AppProvider';
+import { AppContext } from '~/components/context/AppProvider';
 import { updateCustomFrequencies } from '~/services/CustomFrequencyServices';
 
 const AddCustomFrequencyModal = (props: any) => {
   const {
-  } = useContext(AuthContext);
+  } = useContext(AppContext);
   const [statusButton, setStatusButton] = useState(false);
   const [frequencyHz, setFrequency] = useState('');
   const [isValid, setIsValid] = useState(true);

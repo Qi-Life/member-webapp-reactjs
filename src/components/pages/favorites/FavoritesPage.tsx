@@ -12,13 +12,13 @@ import { checkLockAlbum, checkLockByCategory } from '~/helpers/token';
 import { FaLock } from 'react-icons/fa';
 import Advertisement from '~/components/Advertisement';
 import { FaAngleLeft } from 'react-icons/fa6';
-import { AuthContext } from '~/components/context/AppProvider';
+import { AppContext } from '~/components/context/AppProvider';
 import ScrollToTop from '~/components/ScrollToTop';
 import { getFreeAlbums } from '~/services/AlbumServices';
 
 const FavoritesPage = () => {
   const navigate = useNavigate();
-  const { statusScrollTop, setStatusScrollTop, setPathName } = useContext(AuthContext);
+  const { statusScrollTop, setStatusScrollTop, setPathName } = useContext(AppContext);
   const { search, pathname } = useLocation();
   const [dataFavorites, setDataFavorites] = useState([]);
   const [loading, setLoading] = useState(true);

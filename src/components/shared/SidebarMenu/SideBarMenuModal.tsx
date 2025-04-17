@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Link, NavLink, useParams } from 'react-router-dom';
 
-import { AuthContext } from '~/components/context/AppProvider';
+import { AppContext } from '~/components/context/AppProvider';
 import { getPlayList } from '~/services/PlaylistServices';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -22,7 +22,7 @@ import CustomizeIcon from '../../shared/Icons/CustomizeIcon';
 import AdvancedMode from './AdvancedMode';
 
 const SideBarMenuModal = () => {
-    const { dataMyPlaylist, setDataMyPlaylist, userID, showModal, setShowModal, handleOverlayClick } = useContext(AuthContext);
+    const { dataMyPlaylist, setDataMyPlaylist, userID, showModal, setShowModal, handleOverlayClick } = useContext(AppContext);
     const [categories, setcategories] = useState<any>([]);
     const [subCategories, setsubCategories] = useState<any>([]);
     const [combinedData, setcombinedData] = useState<any>([]);

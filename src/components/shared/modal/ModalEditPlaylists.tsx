@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { AuthContext } from '~/components/context/AppProvider';
+import { AppContext } from '~/components/context/AppProvider';
 import { getPlayList, savePlayList } from '~/services/PlaylistServices';
 
 const ModalEditPlaylists = (props: any) => {
@@ -12,7 +12,7 @@ const ModalEditPlaylists = (props: any) => {
     setDataMyPlaylist,
     userID,
     handleClickClose,
-  } = useContext(AuthContext);
+  } = useContext(AppContext);
   const [isLoading, setIsloading] = useState(false)
 
   const [inforNewPlaylist, setInforNewPlaylist] = useState({ ...currentPlaylistEdit });

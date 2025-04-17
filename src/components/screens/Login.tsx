@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { loginUser } from '../../services/AuthServices';
 import { setAccessToken, setUserAndPasswordLocal, isLogined } from '../../helpers/token';
-import { AuthContext } from '../context/AppProvider';
+import { AppContext } from '../context/AppProvider';
 import Head from '../shared/Head';
 import LoadingButton from '../LoadingButton';
 import { addDeviceTokenFCM } from '~/services/ProfileService';
@@ -18,7 +18,7 @@ const loginData: AuthInterface = {
 
 export default function Login() {
     const navigate = useNavigate();
-    const { loading, setLoading } = useContext(AuthContext);
+    const { loading, setLoading } = useContext(AppContext);
     const [inforUser, setInforUser] = useState<AuthInterface>(loginData);
     const [errs, setErrors] = useState<AuthInterface>(loginData);
     const [searchParams, setSearchParams] = useSearchParams();
@@ -95,7 +95,7 @@ export default function Login() {
     return (
         <>
             <Head title="Login" />
-            <section className="bg-white mt-[100px] dark:bg-white pt-[4rem] pb-[2rem] sm:pt-[7.75rem] flex justify-center">
+            <section className="bg-white dark:bg-white pt-[4rem] pb-[2rem] sm:pt-[7.75rem] flex justify-center">
                 <div className="w-[90%] lg:w-[31rem] space-y-[1.875rem]">
                     <h1 className="relative px-[1rem] text-2xl text-center font-bold leading-tight tracking-tight text-[#333333] md:text-2xl">
                         QUANTUM & RIFE <br />FREQUENCY WEBAPP
@@ -145,7 +145,7 @@ export default function Login() {
                                 />
                                 <span className="text-sm">Remember Me</span>
                             </label>
-                            <a href="forgot" className="font-semibold text-base text-[#00565B]">
+                            <a className="font-semibold text-base text-[#00565B]" onClick={() => navigate('/forgot')}>
                                 Forgotten Password?
                             </a>
                         </div>

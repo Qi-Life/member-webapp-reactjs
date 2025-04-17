@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 
-import { AuthContext } from '~/components/context/AppProvider';
+import { AppContext } from '~/components/context/AppProvider';
 import SearchIcon from '~/components/shared/Icons/SearchIcon';
 import AddIcon from '~/assets/img/img_card_plus.png';
 import bannerFooter from '~/assets/img/qc-max-admob-horizontal.jpg';
@@ -26,7 +26,7 @@ const MyPlaylists = () => {
     setShowModal,
     getMyPlaylist,
     setPathName,
-  } = useContext(AuthContext);
+  } = useContext(AppContext);
   const navigate = useNavigate();
   const { search, pathname } = useLocation();
   const keyword = String(new URLSearchParams(search).get('keyword') ?? '');

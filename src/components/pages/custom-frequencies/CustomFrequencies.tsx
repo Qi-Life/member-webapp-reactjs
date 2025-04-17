@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '~/components/context/AppProvider';
+import { AppContext } from '~/components/context/AppProvider';
 import SearchIcon from '~/components/shared/Icons/SearchIcon';
 import AddIcon from '~/assets/img/img_card_plus.png';
 import bannerFooter from '~/assets/img/qc-max-admob-horizontal.jpg';
@@ -22,7 +22,7 @@ const CustomFrequencies = () => {
     statusScrollTop,
     setStatusScrollTop,
     setShowModal,
-  } = useContext(AuthContext);
+  } = useContext(AppContext);
   const [loading, setLoading] = useState(true);
   const [statusDel, setStatusDel] = useState(false);
 

@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 import Head from '~/components/shared/Head';
 
 import { forgotPassword } from '~/services/AuthServices';
-import { AuthContext } from '../context/AppProvider';
+import { AppContext } from '../context/AppProvider';
 import LoadingButton from '../LoadingButton';
 
 export default function Forgot() {
   const [notification, setNotification] = useState('');
-  const { loading, setLoading } = useContext(AuthContext);
+  const { loading, setLoading } = useContext(AppContext);
   const [email, setEmail] = useState('');
 
   // const from = (location.state as LocationState)?.from?.pathname || '/';

@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
-import { AuthContext } from '~/components/context/AppProvider';
+import { AppContext } from '~/components/context/AppProvider';
 import { getPlayList, savePlayList } from '~/services/PlaylistServices';
 
 const ModalCreateNewPlaylist = (props: any) => {
@@ -12,7 +12,7 @@ const ModalCreateNewPlaylist = (props: any) => {
     userID,
     setDataMyPlaylist,
     
-  } = useContext(AuthContext);
+  } = useContext(AppContext);
   const [inforNewPlaylist, setInforNewPlaylist] = useState('');
   const [notifications, setNotifications] = useState('');
   const [loading, setLoading] = useState(false);

@@ -12,7 +12,6 @@ import {
     isLogined,
     deleteAccessToken,
     deleteUserAndPasswordLocal,
-    getAccessToken,
     getInfoUser,
     setUserAndPasswordLocal,
 } from '~/helpers/token';
@@ -24,6 +23,7 @@ import { NotificationContext } from '~/components/context/NotificationProvider';
 import { useAudio } from '~/components/context/AudioProvider';
 import { deleteThread } from '../Chatbot/OpenAIService';
 import { clearUserData } from '~/configs/localstore';
+import searchIcon from 'assets/img/search.png';
 
 let navigation = [
     { name: 'Frequencies', href: '/' },
@@ -51,7 +51,6 @@ let navigationToken = [
     { name: 'Videos', href: '/video' },
     { name: 'Help', href: 'https://help.qilifestore.com/en-US', target: true },
     { name: 'Join Now', href: 'https://www.qicoil.com/pricing/', target: false, isExternal: true },
-    { name: 'Notification', href: "_notify" },
 ];
 let navigationMobileToken = [
     { name: 'Frequencies', href: '/' },
@@ -84,7 +83,7 @@ function navItems(isMobile = false) {
         else if (item.href != "_notify") {
             return (
                 <NavItem key={item.name} href={item.href} target={item?.target} isMobile={isMobile} isExternal={item.isExternal}>
-                    <span className='px-[0.75rem] py-[0.875rem] hover:underline decoration-2 underline-offset-[0.75rem]'>{item.name}</span>
+                    <span className='text-[#1E1E1E]'>{item.name}</span>
                 </NavItem>
             )
         } else {
@@ -202,19 +201,19 @@ function MenuChildren(props: any) {
                             } w-3 h-3 bg-white absolute rotate-[135deg] -top-1 left-[170px] md:left-[165px]  `}
                     ></div>
                     <ul className="pt-[7px] pb-[12px] pl-[1px] min-w-[200px] w-full  mx-auto text-left">
-                        <li className="text-xs  w-full  hover:bg-[#E9ECEF] hover:underline duration-200">
+                        <li className=" w-full  hover:bg-[#E9ECEF] hover:underline duration-200">
                             <NavLink to="/profile" className="text-black h-full w-full block px-[10px] py-2">
                                 My Profile
                             </NavLink>
                         </li>
-                        <li className="text-xs  w-full  hover:bg-[#E9ECEF] hover:underline duration-200">
+                        <li className="w-full  hover:bg-[#E9ECEF] hover:underline duration-200">
                             <NavLink to="/change-password" className="text-black h-full w-full block px-[10px] py-2">
                                 Change Password
                             </NavLink>
                         </li>
                         <li
                             onClick={() => handleLogOut()}
-                            className="text-xs  w-full  hover:bg-[#E9ECEF] hover:underline duration-200"
+                            className="w-full  hover:bg-[#E9ECEF] hover:underline duration-200"
                         >
                             <NavLink to="/login" className="text-black h-full w-full block px-[10px] py-2">
                                 Sign Out
@@ -256,32 +255,33 @@ function SecondaryNavbar(props: any) {
         }
     }, []);
 
+
     return (
-        <div className="flex items-center">
-            <div className="hidden lg:flex items-center font-medium leading-[20px] tracking-[0.1px]">{navItems()}</div>
-            <div className="!hidden md:flex items-center space-x-3 ">
+        <div className="flex items-center px-[1.875rem] ml-auto gap-2">
+            <div className="hidden lg:flex items-center gap-[1.875rem] text-xl text-[#1E1E1E] font-semibold leading-[20px] tracking-[0.1px]">{navItems()}</div>
+            <div className='ml-[1.875rem] mr-[1.25rem] hidden md:block'><img src={searchIcon} /></div>
+            <div className="!hidden md:flex items-center space-x-3">
                 <AuthStatus />
             </div>
             {!isLogined() ? (
                 <></>
             ) : (
-                <>
-                    <div className="hidden lg:block ml-2">
-                        <div className=" flex items-center justify-center shadow-md">
-                            <div
-                                onClick={() => handleClickUser()}
-                                className={`bg-clmenu relative w-9 h-9 rounded-full flex items-center justify-center cursor-pointer`}
-                            >
-                                <span className="text-black font-bold text-[10px] p-1 overflow-hidden truncate">
-                                    {getInfoUser() === null ? '' : getInfoUser()?.substring(0, 2)?.toUpperCase()}
-                                </span>
-                                <DownIcon />
-                                <MenuChildren isOpenChild={isOpenChild} />
-                            </div>
-                        </div>
+                <div className="relative flex items-center justify-between h-[3.375rem] text-white bg-[#2A4C4F] rounded-[4.375rem] px-[0.625rem] cursor-pointer"
+                    onClick={() => handleClickUser()}>
+                    <div
+
+                        className={`bg-clmenu relative w-[2.5rem] h-[2.5rem] rounded-full flex items-center justify-center cursor-pointer`}
+                    >
+                        <span className="text-black font-bold text-[10px] p-1 overflow-hidden truncate">
+                            {getInfoUser() === null ? '' : getInfoUser()?.substring(0, 2)?.toUpperCase()}
+                        </span>
                     </div>
-                </>
+                    <span className='ml-[0.8rem] mr-[1.1rem] font-semibold text-xl'>{getInfoUser()}</span>
+                    <DownIcon fillColor='fill-white' width='w-[12px]' height='h-[7px]' />
+                    <MenuChildren isOpenChild={isOpenChild} />
+                </div>
             )}
+            <MobileMenuButton />
         </div>
     );
 }
@@ -306,10 +306,10 @@ function MobileMenuButton() {
 
 
     return (
-        <div className="lg:hidden w-[53%] flex items-center justify-between">
-            <button className="outline-none mobile-menu-button" onClick={() => handleClickMenu()}>
+        <div className="lg:hidden flex items-center justify-between">
+            <button className="outline-none mobile-menu-button " onClick={() => handleClickMenu()}>
                 <svg
-                    className=" w-8 h-8 text-clmenu  "
+                    className=" w-8 h-8 text-clmenu text-black"
                     x-show="!showMenu"
                     fill="none"
                     strokeLinecap="round"
@@ -321,7 +321,7 @@ function MobileMenuButton() {
                     <path d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
             </button>
-            {isLogined() ? (
+            {/* {isLogined() ? (
                 <>
                     <div className='flex items-center gap-4'>
                         <button className="relative z-10 block rounded-md bg-white p-2 focus:outline-none" onClick={() => navigate('/profile')}>
@@ -377,7 +377,7 @@ function MobileMenuButton() {
                         <div className="w-screen h-[calc(100vh-55px)] bg-black bg-opacity-40 fixed top-0 -z-20 left-0 right-0"></div>
                     )}
                 </div>
-            )}
+            )} */}
         </div>
     );
 }
@@ -425,9 +425,9 @@ type NavContainerProps = {
 
 function NavContainer({ children, isMenuOpen, setIsOpenChild, isOpenChild, wrapperClass }: NavContainerProps) {
     return (
-        <nav className={`${wrapperClass} shadow-lg bg-[#2A4C4F]`}>
-            <div className="px-[1rem] py-[0.5rem] w-full">
-                <div className="flex justify-between h-full ">{children}</div>
+        <nav className={`${wrapperClass} bg-[#297C82]/20 flex`}>
+            <div className="py-[1.25rem] ml-auto w-full">
+                <div className="flex">{children}</div>
             </div>
             <MobileMenu isOpen={isMenuOpen} setIsOpenChild={setIsOpenChild} isOpenChild={isOpenChild} />
         </nav>
@@ -438,8 +438,8 @@ NavContainer.defaultProps = {
     wrapperClass: 'w-full z-50 fixed top-0 right-0 left-0'
 }
 
-export default function NavBar({ wrapperClass }: { wrapperClass?: string }) {
-    const { isMenuOpen, isOpenChild, setIsOpenChild } = useContext(AppContext);
+export default function MainNavBar({ wrapperClass }: { wrapperClass?: string }) {
+    const { isMenuOpen, isOpenChild, setIsOpenChild, togglMobileSidebar } = useContext(AppContext);
     const location = useLocation();
 
     useEffect(() => {
@@ -453,11 +453,21 @@ export default function NavBar({ wrapperClass }: { wrapperClass?: string }) {
     }, [location]);
 
     return (
-        <NavContainer
-            isMenuOpen={isMenuOpen} isOpenChild={isOpenChild} setIsOpenChild={setIsOpenChild} wrapperClass={wrapperClass}>
-            <PrimaryNavbar />
+        <NavContainer isMenuOpen={isMenuOpen} isOpenChild={isOpenChild} setIsOpenChild={setIsOpenChild} wrapperClass={wrapperClass}>
+            <button className='xl:hidden px-2' onClick={togglMobileSidebar}>
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-6 h-6 text-gray-800 cursor-pointer"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 4a1 1 0 011-1h7v18H4a1 1 0 01-1-1V4z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 12h4m0 0l-2-2m2 2l-2 2" />
+                </svg>
+            </button>
             <SecondaryNavbar isOpenChild={isOpenChild} setIsOpenChild={setIsOpenChild} />
-            <MobileMenuButton />
         </NavContainer>
     );
 }

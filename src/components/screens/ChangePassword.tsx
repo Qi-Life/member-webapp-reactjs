@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { changePassword } from '~/services/AuthServices';
-import { AuthContext } from '../context/AppProvider';
+import { AppContext } from '../context/AppProvider';
 import LoadingButton from '../LoadingButton';
 
 const ChangePassword = () => {
-  const { userID, loading, setLoading } = useContext(AuthContext);
+  const { userID, loading, setLoading } = useContext(AppContext);
   const [errors, setErrors] = useState(Object);
   const [inputFields, setInputFields] = useState({ confirm_password: '', password: '', old_password: '' });
   const [msg, setMsg] = useState('');

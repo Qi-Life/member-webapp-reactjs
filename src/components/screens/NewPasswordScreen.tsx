@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { newPassword } from '~/services/AuthServices';
-import { AuthContext } from '../context/AppProvider';
+import { AppContext } from '../context/AppProvider';
 import LoadingButton from '../LoadingButton';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -8,7 +8,7 @@ import { isLogined } from '~/helpers/token';
 import Head from '../shared/Head';
 
 const NewPasswordScreen = () => {
-  const { firstLogin, loading, setLoading } = useContext(AuthContext);
+  const { firstLogin, loading, setLoading } = useContext(AppContext);
   const [inputFields, setInputFields] = useState({ confirm_password: '', password: '', old_password: '' });
   const [msg, setMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');

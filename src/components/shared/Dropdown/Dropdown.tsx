@@ -1,7 +1,7 @@
 // DropdownButton.js
 import React, { useState, useEffect, useRef, ReactNode, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext } from '~/components/context/AppProvider';
+import { AppContext } from '~/components/context/AppProvider';
 import { isLogined, getAccessToken } from '~/helpers/token';
 import { AddFrequencytoPlaylist } from '~/services/FrequencyServices';
 import ModalAddItemToPlaylist from '../modal/ModalAddItemToPlaylist';
@@ -22,7 +22,7 @@ interface DropdownProps {
 const DropdownButton: React.FC<DropdownProps> = ({ id, buttonContent, trackList, background, className, albumTitle, albumId }) => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isShowModalAddItemToPlaylist, setShowModalAddItemToPlaylist] = useState(false);
-  const { dataMyPlaylist, handleClickCreatePlaylist } = useContext(AuthContext);
+  const { dataMyPlaylist, handleClickCreatePlaylist } = useContext(AppContext);
   const [currentPlaylist, setCurrentPlaylist] = useState(null);
 
   const dropdownRef = useRef(null);

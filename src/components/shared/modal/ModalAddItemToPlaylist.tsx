@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { AuthContext } from '~/components/context/AppProvider';
 import LoadingButton from '~/components/LoadingButton';
 
 const ModalAddItemToPlaylist = (props: any) => {
@@ -54,7 +53,7 @@ const ModalAddItemToPlaylist = (props: any) => {
               />
           </div>
            <div className='text-right'>
-             {isLoading && <LoadingButton size={20} />}
+             {isLoading && <LoadingButton />}
                 <button
                     type='button'
                     className="mx-1 h-[34px] px-[12px]  rounded-sm shadow-md  font-medium text-white bg-[#6C757D]"

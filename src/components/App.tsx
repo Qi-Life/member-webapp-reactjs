@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
-import { AuthContext } from '~/components/context/AppProvider';
+import { AppContext } from '~/components/context/AppProvider';
 import Router from '~/components/router/Router';
 import { CiWifiOff } from 'react-icons/ci';
 import { getToken } from 'firebase/messaging';
@@ -17,7 +17,7 @@ import { getAllCategories, getAllSubcategories } from '~/services/CategoryServic
 import Logo from '~/assets/img/logo/qi-life-io-logo.png'
 
 export default function App() {
-    const { isMenuOpen, showModal, statusUser, handleOverlayClick } = useContext(AuthContext) ?? {};
+    const { isMenuOpen, showModal, statusUser, handleOverlayClick } = useContext(AppContext) ?? {};
     const [isOnline, setIsOnline] = useState(navigator.onLine);
     const { playlists, isShowAdvancedMode } = useAudio();
     const [isLoading, setIsLoading] = useState(false);
@@ -124,11 +124,6 @@ export default function App() {
             {isOnline ? (
                 <div
                     onClick={(e) => handleOverlayClick(e)}
-                    className={`${isMenuOpen || showModal || statusUser ? 'h-screen' : 'min-h-screen'
-                        } flex flex-col`}
-                    style={{
-                        paddingBottom: playlists?.length || (isShowAdvancedMode && isLogined()) ? '100px' : ''
-                    }}
                 >
                     <HelmetProvider>
                         <Router />

@@ -2,11 +2,11 @@ import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import photoItem from '~/assets/img/custom_playlist.jpeg';
 import { FreeType } from '~/interface/components.interface';
-import { AuthContext } from './context/AppProvider';
+import { AppContext } from './context/AppProvider';
 import LazyImage from './shared/LazyImage';
 
 const Free = (props: any) => {
-  const { setInfoItem } = useContext(AuthContext);
+  const { setInfoItem } = useContext(AppContext);
   const navigate = useNavigate();
   const { dataFreeFrequencies } = props;
   const linkImage = 'https://apiadmin.qienergy.ai/assets/uploads/mp3/';

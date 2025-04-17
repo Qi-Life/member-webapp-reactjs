@@ -12,7 +12,7 @@ import DuplicateIcon from '~/assets/img/Duplicate.png';
 import Frame599 from '~/assets/img/Frame 599.png';
 
 import { deletePlayList, getPlaylistByUser, savePlayList, votePlayList } from '~/services/PlaylistServices';
-import { AuthContext } from '~/components/context/AppProvider';
+import { AppContext } from '~/components/context/AppProvider';
 import { FaLock } from 'react-icons/fa';
 import { getTrack } from '~/services/InnerFrequenciesServices';
 import ModalAddNewFrequency from '~/components/shared/modal/ModalAddNewFrequency';
@@ -43,7 +43,7 @@ const PlaylistsItem = (props: any) => {
     loading,
     setLoading,
     setIsOpenNewPlaylist,
-  } = useContext(AuthContext);
+  } = useContext(AppContext);
 
   const {
     playIndex,

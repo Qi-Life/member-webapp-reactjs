@@ -1,5 +1,5 @@
 import React, { useContext, useState, useRef, useEffect } from 'react';
-import { AuthContext } from '~/components/context/AppProvider';
+import { AppContext } from '~/components/context/AppProvider';
 import { FaCircleDot } from 'react-icons/fa6';
 import { GoDotFill } from 'react-icons/go';
 import { useLocation } from 'react-router-dom';
@@ -160,7 +160,7 @@ const ModalAddNewFrequency = (props: any) => {
         handleOverlayClick,
         statusButton,
         setStatusButton,
-    } = useContext(AuthContext);
+    } = useContext(AppContext);
     const search = useLocation().search;
     const location = useLocation();
     const [isLoading, setLoading] = useState(false)
@@ -423,7 +423,7 @@ const ModalAddNewFrequency = (props: any) => {
                     {statusButton == 'custom' && <h3 className="font-bold  mb-3">Enter number</h3>}
 
                     <div className="relative inline-block  w-full  mb-3">
-                        {isLoading && <LoadingButton size={20} />}
+                        {isLoading && <LoadingButton />}
                         {statusButton == 'album' &&
                             <div className='p-2'>
                                 <SelectCategory 

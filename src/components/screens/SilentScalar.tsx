@@ -5,7 +5,7 @@ import LoadingButton from '~/components/LoadingButton';
 import BtnIconDes from '~/assets/img/btn-description.png'
 
 import ScrollToTop from '~/components/ScrollToTop';
-import { AuthContext } from '~/components/context/AppProvider';
+import { AppContext } from '~/components/context/AppProvider';
 import LazyImage from '~/components/shared/LazyImage';
 
 import Switcher from '../shared/Switcher';
@@ -113,7 +113,7 @@ const SilentScalar = () => {
     const location = useLocation()
     const searchParams = new URLSearchParams(location.search); // Parse the query string
 
-    const { statusScrollTop, setShowModal } = useContext(AuthContext);
+    const { statusScrollTop, setShowModal } = useContext(AppContext);
     const [silentScalarsList, setSilentScalars] = useState([]);
     const [silentScalarsFilter, setSilentScalarsFilter] = useState([]);
     const [post, setPost] = useState<Post>({

@@ -1,5 +1,5 @@
 import React, { useContext, useState, useRef } from 'react';
-import { AuthContext } from '~/components/context/AppProvider';
+import { AppContext } from '~/components/context/AppProvider';
 import { addCustomFrequencies, getCustomFrequencies } from '~/services/CustomFrequencyServices';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import { toast } from 'react-toastify';
@@ -10,7 +10,7 @@ const ModalAddNewCustomFrequencies = (props: any) => {
 		handleClickClose,
 		setDataCustomFrequency,
 		handleOverlayClick,
-	} = useContext(AuthContext);
+	} = useContext(AppContext);
 
 	const [frequencies, setFrequencies] = useState(['0']);
 

@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 
-import { AuthContext } from './context/AppProvider';
+import { AppContext } from './context/AppProvider';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaLock } from 'react-icons/fa6';
 import { checkLockAlbum } from '~/helpers/token';
 const FeaturedFrequencies = () => {
   const navigate = useNavigate();
-  const { dataFeatured } = useContext(AuthContext);
+  const { dataFeatured } = useContext(AppContext);
   const linkImage = 'https://apiadmin.qienergy.ai/assets/uploads/mp3/';
  
   return (

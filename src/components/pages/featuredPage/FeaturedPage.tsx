@@ -6,13 +6,13 @@ import LoadingButton from '~/components/LoadingButton';
 import { checkLockAlbum } from '~/helpers/token';
 import { FaLock } from 'react-icons/fa';
 import { getFeaturedAlbums, getFreeAlbums } from '~/services/AlbumServices';
-import { AuthContext } from '~/components/context/AppProvider';
+import { AppContext } from '~/components/context/AppProvider';
 import Advertisement from '~/components/Advertisement';
 import { FaAngleLeft } from 'react-icons/fa6';
 import ScrollToTop from '~/components/ScrollToTop';
 
 const FeaturedPage = () => {
-  const { dataFeatured, setDataFeatured, statusScrollTop, setStatusScrollTop } = useContext(AuthContext);
+  const { dataFeatured, setDataFeatured, statusScrollTop, setStatusScrollTop } = useContext(AppContext);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const linkImage = 'https://apiadmin.qienergy.ai/assets/uploads/mp3/';

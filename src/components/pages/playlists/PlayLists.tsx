@@ -10,7 +10,7 @@ import LoadingButton from '~/components/LoadingButton';
 import SideBarMenuModal from '~/components/shared/SidebarMenu/SideBarMenuModal';
 import { isLogined } from '~/helpers/token';
 import ReactPaginate from 'react-paginate';
-import { AuthContext } from '~/components/context/AppProvider';
+import { AppContext } from '~/components/context/AppProvider';
 import ScrollToTop from '~/components/ScrollToTop';
 import LazyImage from '~/components/shared/LazyImage';
 import { saveFavorite } from '~/services/FavoritesServices';
@@ -18,7 +18,7 @@ import { saveFavorite } from '~/services/FavoritesServices';
 const PlayLists = () => {
   const navigate = useNavigate();
   const search = useLocation().search;
-  const { statusScrollTop, setStatusScrollTop, setShowModal } = useContext(AuthContext);
+  const { statusScrollTop, setStatusScrollTop, setShowModal } = useContext(AppContext);
   const [dataPlaylist, setDataPlaylist] = useState([]);
   const [pagination, setPagination] = useState({ page: 1, perPage: 20, total: 0 });
   const [loading, setLoading] = useState(true);

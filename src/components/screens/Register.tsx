@@ -3,7 +3,7 @@ import React, { FormEvent, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Head from '../shared/Head';
 import { loginUser, registerUser } from '../../services/AuthServices';
-import { AuthContext } from '../context/AppProvider';
+import { AppContext } from '../context/AppProvider';
 import LoadingButton from '../LoadingButton';
 import { setAccessToken, setUserAndPasswordLocal } from '~/helpers/token';
 import { trackFacebookEvent } from '~/helpers/fbq';
@@ -22,7 +22,7 @@ const registerData: RegisterType = {
 export default function Register() {
     const navigate = useNavigate();
     const [inforRegister, setInforRegister] = useState({ name: '', email: '', password: '' });
-    const { loading, setLoading } = useContext(AuthContext);
+    const { loading, setLoading } = useContext(AppContext);
     const [errs, setErrors] = useState<RegisterType>(registerData);
     const [registrationSuccess, setRegistrationSuccess] = useState(false);
 
@@ -163,7 +163,7 @@ export default function Register() {
                     </div>
                     <p className="text-base text-center">
                         Already have an account?{' '}
-                        <a href="login" className="font-semibold text-[#6C5E0D]">
+                        <a onClick={() => navigate('/login')} className="font-semibold text-[#6C5E0D] cursor-pointer">
                             Login
                         </a>
                         <br />

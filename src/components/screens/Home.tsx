@@ -14,7 +14,7 @@ import _ from 'lodash';
 import LoadingButton from '../LoadingButton';
 
 import ScrollToTop from '../ScrollToTop';
-import { AuthContext } from '../context/AppProvider';
+import { AppContext } from '../context/AppProvider';
 import SearchForm from '../shared/SearchForm';
 
 import QiciolMaxBanner from '../../assets/img/banner/bn-mobile/qicoil-max-scalar_348x43_strip-banner.jpg'
@@ -34,7 +34,7 @@ export default function HomeScreen() {
   const [loading, setLoading] = useState(false);
   const [dataFreeFrequencies, setDataFreeFrequencies] = useState([]);
   const keyword = String(new URLSearchParams(search).get('keyword') ?? '');
-  const { statusScrollTop, setStatusScrollTop, setShowModal, setPathName } = useContext(AuthContext);
+  const { statusScrollTop, setStatusScrollTop, setShowModal, setPathName } = useContext(AppContext);
 
   const getDataFreeFrequencies = async () => {
     setPathName(pathname);
@@ -64,15 +64,6 @@ export default function HomeScreen() {
     []
   );
 
-  const handleChange = (e: any) => {
-    if (e.target.value.trim() === '') {
-      handleEnterSearch(e.target.value.trim());
-      setStatusChildMenu(false);
-    } else {
-      setStatusChildMenu(true);
-    }
-    setSearchInput(e.target.value.trim());
-  };
   const handleSearch = async (value: string) => {
     if (value.trim() !== '') {
       navigate(`/search?keyword=${value}`);

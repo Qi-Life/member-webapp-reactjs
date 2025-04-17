@@ -2,10 +2,10 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import ChatbotLoader from './ChatbotLoader';
 import { addMessageToThread, createThread, runThread } from './OpenAIService';
-import { AuthContext } from '~/components/context/AppProvider';
+import { AppContext } from '~/components/context/AppProvider';
 
 const ActionProvider = ({ createChatBotMessage, setState, children }: any) => {
-  const { chatbotThread, setChatbotThread, isShowChatbot } = useContext(AuthContext)
+  const { chatbotThread, setChatbotThread, isShowChatbot } = useContext(AppContext)
   const hasRun = useRef(false);
 
   let thread = chatbotThread

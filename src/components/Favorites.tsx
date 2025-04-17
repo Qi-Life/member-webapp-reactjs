@@ -5,14 +5,14 @@ import photoItem from '~/assets/img/image/frequency.png';
 import { getFavorites } from '~/services/FavoritesServices';
 import { FaCircleChevronLeft } from 'react-icons/fa6';
 import { FaCircleChevronRight } from 'react-icons/fa6';
-import { AuthContext } from './context/AppProvider';
+import { AppContext } from './context/AppProvider';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaLock } from 'react-icons/fa';
 import { checkLockAlbum, checkLockByCategory, isLogined, getAccessToken } from '~/helpers/token';
 import LazyImage from './shared/LazyImage';
 
 const Favorites = () => {
-  const { setInfoItem } = useContext(AuthContext);
+  const { setInfoItem } = useContext(AppContext);
   const navigate = useNavigate();
   const [dataFavorites, setDataFavorites] = useState([]) as any;
   const [buttonLeft, setButtonLeft] = useState(false);

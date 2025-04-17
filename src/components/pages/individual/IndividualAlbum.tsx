@@ -6,7 +6,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import LoadingButton from '~/components/LoadingButton';
 import Advertisement from '~/components/Advertisement';
 
-import { AuthContext } from '~/components/context/AppProvider';
+import { AppContext } from '~/components/context/AppProvider';
 import ScrollToTop from '~/components/ScrollToTop';
 import { getFreeAlbums, getIndividualAlbum } from '~/services/AlbumServices';
 import SideBarMenuModal from '~/components/shared/SidebarMenu/SideBarMenuModal';
@@ -14,7 +14,7 @@ import FilterIcon from '~/components/shared/Icons/FilterIcon';
 
 const IndividuaAlbum = () => {
   const navigate = useNavigate();
-  const { statusScrollTop, setStatusScrollTop, setPathName, setShowModal } = useContext(AuthContext);
+  const { statusScrollTop, setStatusScrollTop, setPathName, setShowModal } = useContext(AppContext);
 
   const { search, pathname } = useLocation();
   const [invidualAlbums, setIndividualAlbums] = useState([]);

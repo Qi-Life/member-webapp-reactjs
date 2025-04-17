@@ -9,14 +9,14 @@ import chatbotButonImage from '../../../assets/img/chatbot-icon.png'
 import chatbotAsk from '../../../assets/img/chat-ask.png'
 import { configApp } from "~/configs/config";
 import { getToken } from "~/helpers/token";
-import { AuthContext } from "~/components/context/AppProvider";
+import { AppContext } from "~/components/context/AppProvider";
 import { createThread } from "./OpenAIService";
 
 const ChatbotComponent = (props: any) => {
   const [showBot, toggleBot] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
   const [isShowAsk, setIsShowAsk] = useState(true);
-  const { chatbotThread, setIsShowChatBot, setChatbotThread } = useContext(AuthContext)
+  const { chatbotThread, setIsShowChatBot, setChatbotThread } = useContext(AppContext)
 
   const saveMessages = (messages: any) => {
     localStorage.setItem('chat_messages', JSON.stringify(messages));

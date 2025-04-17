@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import LoadingButton from '~/components/LoadingButton';
-import { AuthContext } from '~/components/context/AppProvider';
+import { AppContext } from '~/components/context/AppProvider';
 import { getPlayList, savePlayList } from '~/services/PlaylistServices';
 
 const ModalAddNewPlaylists = (props: any) => {
@@ -12,7 +12,7 @@ const ModalAddNewPlaylists = (props: any) => {
     setStatusButton,
     userID,
     handleOverlayClick,
-  } = useContext(AuthContext);
+  } = useContext(AppContext);
   const navigate = useNavigate()
 
   const [inforNewPlaylist, setInforNewPlaylist] = useState({ name: '', description: '', private: 0 });
@@ -157,7 +157,7 @@ const ModalAddNewPlaylists = (props: any) => {
             className="mx-1 px-3 h-9 py-1 rounded-sm shadow-md text-[12px] bg-[#059f83] font-medium text-white ic-center"
           >
             Add
-            {loading && <LoadingButton className="w-4 h-4" />}
+            {loading && <LoadingButton />}
           </button>
         </div>
       </div>

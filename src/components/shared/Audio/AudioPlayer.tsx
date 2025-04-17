@@ -12,7 +12,7 @@ import siIcon from '~/assets/img/btn-sine-on.png';
 import sqIcon from '~/assets/img/btn-sq-on.png';
 import { FaLock } from 'react-icons/fa';
 import { useAudio } from '~/components/context/AudioProvider';
-import { AuthContext } from '~/components/context/AppProvider';
+import { AppContext } from '~/components/context/AppProvider';
 
 declare global {
 	interface Window {
@@ -49,7 +49,7 @@ const AudioPlayer = forwardRef((props: any, ref: any) => {
 		isPlayWithSuff,
 		handlePlayWithSuff,
 	} = useAudio();
-	const { isPremium } = useContext(AuthContext);
+	const { isPremium } = useContext(AppContext);
 
 	const [_isPlay, _setIplay] = useState(false);
 	const [_totalTime, _setTotalTime] = useState(0);
