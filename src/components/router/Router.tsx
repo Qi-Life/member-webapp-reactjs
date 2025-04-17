@@ -1,16 +1,8 @@
-import { Suspense, useContext, useEffect } from 'react';
-import { BrowserRouter, Outlet, RouteObject, useRoutes, Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { Suspense } from 'react';
+import { BrowserRouter, RouteObject, useRoutes, Navigate } from 'react-router-dom';
 import RequireAuth from './RequireAuth';
-import NavBar from '~/components/shared/Nav/NavBar';
 import Loading from '~/components/shared/Loading';
-import Footer from '../shared/Footer/Footer';
-import SideBarMenu from '../shared/SidebarMenu/SideBarMenu';
-import ModalAddNewPlaylists from '../shared/modal/ModalAddNewPlaylists';
-import ModalCreateNewPlaylist from '../shared/modal/ModalCreateNewPlaylist';
-import ModalEditPlaylists from '../shared/modal/ModalEditPlaylists';
-import ModalAddNewCustomFrequencies from '../shared/modal/ModalAddNewCustomFrequencies';
 import ThankPayment from '../shared/SubscriptionForm/ThankPayment';
-import { motion } from 'framer-motion';
 
 import HomeScreen from '~/components/screens/Home';
 import LoginScreen from '~/components/screens/Login';
@@ -36,15 +28,11 @@ import ChangePasswordScreen from '~/components/screens/ChangePassword';
 import NewPasswordScreen from '../screens/NewPasswordScreen';
 import CustomFrequenciesDetail from '~/components/pages/custom-frequencies/CustomFrequenciesDetail';
 
-
 import InnerFrequencyScreen from '~/components/pages/inner-frequency/InnerFrequency';
 import SearchScreen from '../screens/Search';
-import { AuthContext } from '../context/AppProvider';
 import NotificationDetail from '../pages/notifications/NotificationDetail';
 import HandleChatMessage from '../screens/HandleChatMessage';
 import SilentScalar from '../screens/SilentScalar';
-import AudioPlayerMini from '../shared/Audio/AudioPlayerMini';
-import ChatbotComponent from '../shared/Chatbot/ChatbotComponent';
 import NotFoundSubscription from '../shared/SubscriptionForm/NotFoundSubscription';
 import IndividuaAlbum from '../pages/individual/IndividualAlbum';
 import HolisticHealthLanding1 from '../pages/holistic-health/HolisticHealthLanding';
@@ -53,140 +41,28 @@ import HolisticHealthResult from '../pages/holistic-health/HolisticHealthResult'
 import MHolisticHeathLanding from '../pages/holistic-health/mobile/MHolisticHeathLanding';
 import MHolisticHeath from '../pages/holistic-health/mobile/MHolisticHeath';
 import MHolisticHeathResult from '../pages/holistic-health/mobile/MHolisticHeathResult';
-import { isLogined } from '~/helpers/token';
-
-
-const pageVariants = {
-  initial: {
-    opacity: 0,
-  },
-  in: {
-    opacity: 1,
-  },
-  out: {
-    opacity: 0,
-  },
-};
-
-const pageTransition = {
-  type: 'tween',
-  ease: 'linear',
-  duration: 0.5,
-};
-
-function Layout() {
-  const { pathname } = useLocation();
-  const { setDataMyPlaylist } = useContext(AuthContext);
-
-  return (
-    <div className="relative ">
-      <NavBar />
-      {/* <Alert /> */}
-      <div className="min-h-screen flex bg-[rgb(236,245,244)]  pb-4 px-[3%] sm:px-[2%] pt-[80px]">
-        <div className="md:w-1/4 lg:w-1/5">
-          <SideBarMenu />
-        </div>
-        <div className="md:w-3/4 lg:w-4/5 md:px-4 lg:pl-8 w-full">
-          <motion.div key={pathname} initial="initial" animate="in" variants={pageVariants} transition={pageTransition}>
-            <Outlet />
-            <AudioPlayerMini />
-            <ChatbotComponent />
-          </motion.div>
-        </div>
-      </div>
-      <Footer />
-      <ModalAddNewCustomFrequencies />
-      {setDataMyPlaylist && <ModalAddNewPlaylists setDataMyPlaylist={setDataMyPlaylist} />}
-    </div>
-  );
-}
-
-function LayoutwithoutSideBar({ color }: { color?: string }) {
-  if (!color) color = 'bg-white';
-  const { pathname } = useLocation();
-  return (
-    <div className="relative dark:bg-white flex-1">
-      <NavBar />
-      {/* <Alert /> */}
-
-      <div className={` ${color}`}>
-        <motion.div key={pathname} initial="initial" animate="in" variants={pageVariants} transition={pageTransition}>
-          <Outlet />
-        </motion.div>
-      </div>
-      {/* <Footer /> */}
-      <AudioPlayerMini />
-      <ModalCreateNewPlaylist />
-      <ModalEditPlaylists />
-    </div>
-  );
-}
-
-
-const HolictisLayout = () => {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const isLoggedIn = isLogined()// Example check for auth token
-    if (!isLoggedIn) {
-      return navigate('/login');
-    }
-  }, [navigate]);
-
-  return (
-    <div style={{ fontFamily: 'League Spartan, sans-serif', fontWeight: 300, marginBottom: '-100px', backgroundColor: '#ffffff' }}>
-      <div className='absolute z-20 right-0 top-0 p-5  text-2xl md:text-3xl text-[#409f83] hover:opacity-0.8 cursor-pointer' onClick={()=> navigate('/')}>X</div>
-      <Outlet />
-    </div>
-  );
-};
-
-
-
-const MHolictisLayout = () => {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const isLoggedIn = isLogined()// Example check for auth token
-    if (!isLoggedIn) {
-      return navigate('/login');
-    }
-  }, [navigate]);
-
-  return (
-    <div style={{ fontFamily: 'Lexend, sans-serif', fontWeight: 300, backgroundColor: '#ffffff', marginBottom: '-100px' }}>
-      <div className='absolute right-0 top-0 p-5 text-2xl md:text-3xl text-[#409f83] hover:opacity-0.8 cursor-pointer' onClick={()=> navigate('/')}>X</div>
-      <Outlet />
-    </div>
-  );
-};
-
-
-
+import MainLayout from '../layout/MainLayout';
+import LayoutWithoutSideBar from '../layout/LayoutWithoutSideBar';
+import HolictisLayout from '../layout/HolictisLayout';
+import MHolictisLayout from '../layout/MHolictisLayout';
 
 function Routes() {
   const routes: RouteObject[] = [
     {
       path: '/',
-      element: <Layout />,
+      element: <MainLayout />,
       children: [
         {
           path: '/masterwong-ai',
-          element: (
-            <HandleChatMessage />
-          ),
+          element: <HandleChatMessage />,
         },
         {
           path: '/goback',
-          element: (
-            <div />
-          ),
+          element: <div />,
         },
         {
           path: '/silent-quantum',
-          element: (
-            <SilentScalar />
-          ),
+          element: <SilentScalar />,
         },
         {
           index: true,
@@ -302,20 +178,18 @@ function Routes() {
     },
     {
       path: '/payment',
-      element: <LayoutwithoutSideBar />,
+      element: <LayoutWithoutSideBar />,
       children: [
         {
           index: true,
-          element: (
-            <PaymentScreen />
-          ),
+          element: <PaymentScreen />,
         },
       ],
     },
 
     {
       path: '/login',
-      element: <LayoutwithoutSideBar />,
+      element: <LayoutWithoutSideBar />,
       children: [
         {
           index: true,
@@ -326,7 +200,7 @@ function Routes() {
 
     {
       path: '/register',
-      element: <LayoutwithoutSideBar />,
+      element: <LayoutWithoutSideBar />,
       children: [
         {
           index: true,
@@ -336,7 +210,7 @@ function Routes() {
     },
     {
       path: '/forgot',
-      element: <LayoutwithoutSideBar />,
+      element: <LayoutWithoutSideBar />,
       children: [
         {
           index: true,
@@ -346,7 +220,7 @@ function Routes() {
     },
     {
       path: '/video',
-      element: <LayoutwithoutSideBar />,
+      element: <LayoutWithoutSideBar />,
       children: [
         {
           index: true,
@@ -356,7 +230,7 @@ function Routes() {
     },
     {
       path: '/privacy-policy',
-      element: <LayoutwithoutSideBar />,
+      element: <LayoutWithoutSideBar />,
       children: [
         {
           index: true,
@@ -367,7 +241,7 @@ function Routes() {
 
     {
       path: '/disclaimer',
-      element: <LayoutwithoutSideBar />,
+      element: <LayoutWithoutSideBar />,
       children: [
         {
           index: true,
@@ -378,7 +252,7 @@ function Routes() {
 
     {
       path: '/terms-and-condition',
-      element: <LayoutwithoutSideBar />,
+      element: <LayoutWithoutSideBar />,
       children: [
         {
           index: true,
@@ -389,7 +263,7 @@ function Routes() {
 
     {
       path: '/inner_frequencies',
-      element: <LayoutwithoutSideBar color="bg-white" />,
+      element: <LayoutWithoutSideBar color="bg-white" />,
       children: [
         {
           index: true,
@@ -399,7 +273,7 @@ function Routes() {
     },
     {
       path: '/custom-frequencies-detail',
-      element: <LayoutwithoutSideBar color="bg-white" />,
+      element: <LayoutWithoutSideBar color="bg-white" />,
       children: [
         {
           index: true,
@@ -409,7 +283,7 @@ function Routes() {
     },
     {
       path: '/tutorials',
-      element: <LayoutwithoutSideBar />,
+      element: <LayoutWithoutSideBar />,
       children: [
         {
           index: true,
@@ -419,7 +293,7 @@ function Routes() {
     },
     {
       path: '/playlists',
-      element: <LayoutwithoutSideBar />,
+      element: <LayoutWithoutSideBar />,
       children: [
         {
           index: true,
@@ -429,7 +303,7 @@ function Routes() {
     },
     {
       path: '/popular_playlists',
-      element: <LayoutwithoutSideBar />,
+      element: <LayoutWithoutSideBar />,
       children: [
         {
           index: true,
@@ -439,7 +313,7 @@ function Routes() {
     },
     {
       path: '/change-password',
-      element: <LayoutwithoutSideBar />,
+      element: <LayoutWithoutSideBar />,
       children: [
         {
           index: true,
@@ -449,7 +323,7 @@ function Routes() {
     },
     {
       path: '/payment-success',
-      element: <LayoutwithoutSideBar />,
+      element: <LayoutWithoutSideBar />,
       children: [
         {
           index: true,
@@ -459,7 +333,7 @@ function Routes() {
     },
     {
       path: '/not-found-subscription',
-      element: <LayoutwithoutSideBar />,
+      element: <LayoutWithoutSideBar />,
       children: [
         {
           index: true,
@@ -469,12 +343,11 @@ function Routes() {
     },
     {
       path: '/new-password',
-      element: <LayoutwithoutSideBar />,
+      element: <LayoutWithoutSideBar />,
       children: [
         {
           index: true,
-          element: <NewPasswordScreen />
-          ,
+          element: <NewPasswordScreen />,
         },
       ],
     },
@@ -484,8 +357,7 @@ function Routes() {
       children: [
         {
           index: true,
-          element: <HolisticHealthLanding1 />
-          ,
+          element: <HolisticHealthLanding1 />,
         },
       ],
     },
@@ -495,8 +367,7 @@ function Routes() {
       children: [
         {
           index: true,
-          element: <HolisticHealth />
-          ,
+          element: <HolisticHealth />,
         },
       ],
     },
@@ -506,8 +377,7 @@ function Routes() {
       children: [
         {
           index: true,
-          element: <HolisticHealthResult />
-          ,
+          element: <HolisticHealthResult />,
         },
       ],
     },
@@ -517,8 +387,7 @@ function Routes() {
       children: [
         {
           index: true,
-          element: <MHolisticHeathLanding />
-          ,
+          element: <MHolisticHeathLanding />,
         },
       ],
     },
@@ -528,8 +397,7 @@ function Routes() {
       children: [
         {
           index: true,
-          element: <MHolisticHeath />
-          ,
+          element: <MHolisticHeath />,
         },
       ],
     },
@@ -539,8 +407,7 @@ function Routes() {
       children: [
         {
           index: true,
-          element: <MHolisticHeathResult />
-          ,
+          element: <MHolisticHeathResult />,
         },
       ],
     },
@@ -558,4 +425,3 @@ export default function Router() {
     </BrowserRouter>
   );
 }
-
