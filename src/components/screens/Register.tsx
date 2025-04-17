@@ -1,192 +1,175 @@
 import React, { FormEvent, useState, useContext } from 'react';
 // import ReCAPTCHA from 'react-google-recaptcha';
 import { useNavigate } from 'react-router-dom';
-import freeFrequencyBundles from '../../assets/img/image/free_frequency_bundles.jpg';
 import Head from '../shared/Head';
 import { loginUser, registerUser } from '../../services/AuthServices';
 import { AuthContext } from '../context/AppProvider';
 import LoadingButton from '../LoadingButton';
 import { setAccessToken, setUserAndPasswordLocal } from '~/helpers/token';
 import { trackFacebookEvent } from '~/helpers/fbq';
+import { validateEmail } from '~/helpers/util';
 
-export default function Register() {
-  const navigate = useNavigate();
-  const [inforRegister, setInforRegister] = useState({ name: '', email: '', password: '' });
-  const { loading, setLoading } = useContext(AuthContext);
+import freeFrequencyBundles from '../../assets/img/image/free_frequency_bundles.png';
+import { RegisterType } from '~/interface/auth.interface';
+import { toast } from 'react-toastify';
 
-  const [registrationSuccess, setRegistrationSuccess] = useState(false);
-  const [notifications, setNotifications] = useState({
+const registerData: RegisterType = {
     name: '',
     email: '',
     password: '',
-    note: '',
-  });
-  // const from = (location.state as LocationState)?.from?.pathname || '/';
-  const validateEmail = (email: string) => {
-    // Basic email validation regex
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
+};
 
-  const handleChangeInput = (e: any) => {
-    const { name, value } = e.target;
-    setInforRegister({ ...inforRegister, [name]: value.trim() });
-    const newNotifications = { ...notifications };
-    if (name === 'name') {
-      newNotifications.name = value.trim() === '' ? 'Please enter name.' : '';
-    }
-    if (name === 'email') {
-      newNotifications.email = !validateEmail(value)
-        ? 'Please enter a valid Email Address.'
-        : (newNotifications.email = value.trim() === '' ? 'Please enter Email Address.' : '');
-    }
-    if (name === 'password') {
-      newNotifications.password =
-        value.trim() === ''
-          ? 'Please enter Password.'
-          : (newNotifications.password = value.length < 8 ? 'Password must be at least 8 characters long.' : '');
-    }
-    setNotifications(newNotifications);
-  };
+export default function Register() {
+    const navigate = useNavigate();
+    const [inforRegister, setInforRegister] = useState({ name: '', email: '', password: '' });
+    const { loading, setLoading } = useContext(AuthContext);
+    const [errs, setErrors] = useState<RegisterType>(registerData);
+    const [registrationSuccess, setRegistrationSuccess] = useState(false);
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setLoading(true);
-    const formData = new FormData(event.currentTarget);
-    const name = formData.get('name') as string;
-    const email = formData.get('email') as string;
-    const password = formData.get('password') as string;
 
-    try {
-      const resRegister = await registerUser({ name, email, password });
+    const validateForm = (values: Partial<RegisterType>) => {
+        const newErrors = { ...errs };
+        if ('name' in values) {
+            newErrors.name = values?.name?.length ? '' : 'Name is required';
+        }
+        if ('email' in values) {
+            newErrors.email = validateEmail(values.email || '') ? '' : 'Email invalid';
+        }
+        if ('password' in values) {
+            newErrors.password = !values.password?.length ? 'Password is required' : values.password?.length < 8 ? 'Password must be at least 8 characters' : '';
+        }
+        setErrors(newErrors);
+    };
 
-      if (resRegister.data.user[0].fetch_flag != -1) {
-        setTimeout(() => {
-          setLoading(false);
-        }, 1000);
-        setTimeout(() => {
-          loginUser({ email, password }).then((res: any) => {
-            if (res.data.user[0].token) {
-              trackFacebookEvent('CompleteRegistration');
-              setAccessToken(res.data.user[0].token);
-              setUserAndPasswordLocal(res.data.user[0]);
-              navigate('/starter-frequencies');
-              setTimeout(() => {
-                setLoading(false);
-              }, 1000);
+
+    const handleChangeInput = (e: any) => {
+        const { name, value } = e.target;
+        setInforRegister({ ...inforRegister, [name]: value.trim() });
+        validateForm({ [name]: value })
+    };
+
+    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        setLoading(true);
+        const formData = new FormData(event.currentTarget);
+        const name = formData.get('name') as string;
+        const email = formData.get('email') as string;
+        const password = formData.get('password') as string;
+
+        try {
+            const registerResponse = await registerUser({ name, email, password });
+            setLoading(false);
+            if (registerResponse.data.user[0].fetch_flag != -1) {
+                toast.success('Register successfull.')
+                loginUser({ email, password }).then((res: any) => {
+                    if (res.data.user[0].token) {
+                        trackFacebookEvent('CompleteRegistration');
+                        setAccessToken(res.data.user[0].token);
+                        setUserAndPasswordLocal(res.data.user[0]);
+                        navigate('/starter-frequencies');
+                    }
+                });
+            } else {
+                toast.error(registerResponse?.data?.user[0]?.rsp_msg)
             }
-          });
-          // navigate('/starter-frequencies');
-          setRegistrationSuccess(true);
-        }, 1000);
-      } else {
-        setTimeout(() => {
-          setLoading(false);
-          setNotifications({ ...notifications, note: resRegister.data.user[0]?.rsp_msg });
-        }, 500);
-      }
-    } catch (error) {
-      setTimeout(() => {
-        setLoading(false);
-      }, 1000);
-    }
-  };
+        } catch (error) {
+            setTimeout(() => {
+                setLoading(false);
+            }, 1000);
+        }
+    };
 
-  return (
-    <>
-      <Head title="Register" />
-      <section className="bg-white min-h-screen pt-[120px]" >
-        <div className="flex flex-col items-center px-3 md:px-6 py-8 mx-auto lg:py-0">
-          <div className="w-full  md:mt-0 sm:max-w-2xl xl:p-0 ">
-            <div className=" space-y-4 md:space-y-6 ">
-              <h1 className="text-2xl font-bold leading-tight tracking-tight text-center text-[#059f83] md:text-2xl">
-                Sign Up For a Free Account
-              </h1>
-              <h2 className="text-xl text-[#059f83] text-center">Get 8 Meditation Frequencies FREE ($197 Value)</h2>
-              <h2 className="text-xl text-[#059f83] text-center">Search 10,000+ Rife Frequencies FREE</h2>
-              <img
-                src={freeFrequencyBundles}
-                alt="Logo"
-                className="items-center mx-auto  block"
-                style={{ height: '20rem' }}
-              />
-              {notifications.note && (
-                <p className="text-red-500 text-center font-semibold !mt-2">{notifications.note}</p>
-              )}
-              <div>
-                {registrationSuccess ? (
-                  <div className="text-green-600 text-base">Registration successful! </div>
-                ) : (
-                  <form className="space-y-4 " onSubmit={handleSubmit}>
-                    <input
-                      type="text"
-                      name="name"
-                      className="border-[#059F83] dark:bg-inherit border-b-2 text-gray-900 placeholder:text-gray-900 placeholder:font-medium sm:text-sm  focus:none outline-none block w-full p-2.5 h-[34px]"
-                      placeholder="Name"
-                      value={inforRegister.name}
-                      onChange={(e) => handleChangeInput(e)}
+    return (
+        <>
+            <Head title="Register" />
+            <section className="bg-white min-h-screen pt-[120px] flex justify-center pb-[2rem]">
+                <div className="space-y-[2.31rem] w-[90%] sm:w-[30.5rem]">
+                    <div className='space-y-[0.688rem]'>
+                        <h1 className="text-2xl font-bold leading-tight tracking-tight text-center md:text-2xl">
+                            Sign Up For a Free Account
+                        </h1>
+                        <h2 className="text-base text-center">Get 8 Meditation Frequencies FREE ($197 Value)</h2>
+                        <h2 className="text-base text-center">Search 10,000+ Rife Frequencies FREE</h2>
+                    </div>
+                    <img
+                        src={freeFrequencyBundles}
+                        alt="Logo"
+                        className="items-center mx-auto  block"
                     />
-                    {notifications.name && (
-                      <p className="text-red-500 text-center font-semibold !mt-2">{notifications.name}</p>
-                    )}
+                    <div>
+                        {registrationSuccess ? (
+                            <div className="text-green-600 text-base">Registration successful! </div>
+                        ) : (
+                            <form className="bg-[#C5E9ED] px-[0.625rem] pt-[0.625rem] pb-[1.25rem] rounded-[0.875rem] space-y-[0.938rem]" onSubmit={handleSubmit}>
+                                <div className="p-[0.625rem]">
+                                    <label className='text-base block mb-[0.625rem]'>Name</label>
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        className="block w-full h-[3rem] rounded-[4px] outline-none p-2"
+                                        placeholder="Name"
+                                        value={inforRegister.name}
+                                        onChange={(e) => handleChangeInput(e)}
+                                    />
+                                    {errs.name && (
+                                        <p className="!mt-2 text-[#ED3E4E] text-xs absolute">{errs.name}</p>
+                                    )}
+                                </div>
+                                <div className="p-[0.625rem]">
+                                    <label className='text-base block mb-[0.625rem]'>Email</label>
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        className="block w-full h-[3rem] rounded-[4px] outline-none p-2"
+                                        placeholder="Email"
+                                        value={inforRegister.email}
+                                        onChange={(e) => handleChangeInput(e)}
+                                    />
+                                    {errs.email && (
+                                        <p className="!mt-2 text-[#ED3E4E] text-xs absolute">{errs.email}</p>
+                                    )}
+                                </div>
+                                <div className="p-[0.625rem]">
+                                    <label className='text-base block mb-[0.625rem]'>Password</label>
+                                    <input
+                                        type="password"
+                                        name="password"
+                                        placeholder="Password"
+                                        className="block w-full h-[3rem] rounded-[4px] outline-none p-2"
+                                        onChange={(e) => handleChangeInput(e)}
+                                        value={inforRegister.password}
+                                    />
+                                    {errs.password && (
+                                        <p className="!mt-2 text-[#ED3E4E] text-xs absolute">{errs.password}</p>
+                                    )}
+                                </div>
+                                <div className='text-center'>
 
-                    <input
-                      type="email"
-                      name="email"
-                      className="border-[#059F83] dark:bg-inherit border-b-2  text-gray-900 placeholder:text-gray-900 placeholder:font-medium  sm:text-sm  focus:none outline-none block w-full p-2.5 h-[34px]"
-                      placeholder="Email"
-                      value={inforRegister.email}
-                      onChange={(e) => handleChangeInput(e)}
-                    />
-                    {notifications.email && (
-                      <p className="text-red-500 text-center font-semibold !mt-2">{notifications.email}</p>
-                    )}
-
-                    <input
-                      type="password"
-                      name="password"
-                      placeholder="Password"
-                      className="border-[#059F83] dark:bg-inherit border-b-2 text-gray-900 placeholder:text-gray-900 placeholder:font-medium sm:text-sm outline-none  block w-full p-2.5 h-[34px]"
-                      onChange={(e) => handleChangeInput(e)}
-                      value={inforRegister.password}
-                    />
-                    {notifications.password && (
-                      <p className="text-red-500 text-center font-semibold !mt-2">{notifications.password}</p>
-                    )}
-
-                    <button
-                      disabled={
-                        notifications.name !== '' || notifications.email !== '' || notifications.password !== ''
-                          ? true
-                          : false
-                      }
-                      type="submit"
-                      className="w-full !mt-10 md:h-[63px] text-base md:text-[28px] font-bold text-white bg-[#059f83] mx-auto  flex items-center justify-center hover:bg-primary-700 hover:opacity-90 shadow-md
-                      focus:outline-none  rounded-lg py-2.5 text-center !mb-7 "
-                    >
-                      {loading ? <LoadingButton /> : <></>}
-                      <span className="ml-2">Sign Up</span>
-                    </button>
-                    <p className="text-sm text-center  text-[#059f83]">
-                      Already have an account?{' '}
-                      <a href="login" className="font-medium text-primary-600 underline">
-                        Login
-                      </a>
-                      <br />
-                      <a
-                        href="forgot"
-                        className="font-medium text-primary-600 underline text-[#059f83]"
-                      >
-                        Forgotten Password?
-                      </a>
+                                    <button
+                                        disabled={
+                                            errs.name !== '' || errs.email !== '' || errs.password !== ''
+                                                ? true
+                                                : false
+                                        }
+                                        type="submit"
+                                        className="px-[1.56rem] py-[0.625rem] text-base text-white rounded-[0.625rem] bg-[#00565B]"
+                                    >
+                                        <LoadingButton loading={loading} />
+                                        Sign Up
+                                    </button>
+                                </div>
+                            </form>
+                        )}
+                    </div>
+                    <p className="text-base text-center">
+                        Already have an account?{' '}
+                        <a href="login" className="font-semibold text-[#6C5E0D]">
+                            Login
+                        </a>
+                        <br />
                     </p>
-                  </form>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
-  );
+                </div>
+            </section>
+        </>
+    );
 }

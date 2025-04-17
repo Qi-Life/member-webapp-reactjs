@@ -4,14 +4,14 @@ import { AuthContext } from '~/components/context/AppProvider';
 
 
 function navLinkClasses(isActive: boolean, isMobile: boolean) {
-  let commonClasses = 'block text-sm text-[#D2B96D] p-2  text-[12px] ';
+  let commonClasses = 'block text-sm text-[#FFF] p-2  text-sm ';
   if (isMobile) {
-    return `${commonClasses} ${isActive ? ' ' : 'hover:text-[#D2B96D] transition duration-300'}`;
+    return `${commonClasses} ${isActive ? ' ' : 'hover:text-[#FFF] transition duration-300'}`;
   }
-  commonClasses = ' hover:text-[#D2B96D] transition duration-300';
+  commonClasses = 'transition duration-300';
   return `${commonClasses} ${isActive
-    ? 'text-[#D2B96D] font-bold underline decoration-[1.5px] underline-offset-[16px] decoration-[#409f83]  last:min-w-[50px]'
-    : `text-[#D2B96D] font-bold hover:underline hover:underline-offset-1 hover:decoration-[1px] hover:decoration-[#D2B96D] duration-300 last:min-w-[50px] font-xs `
+    ? 'text-[#FFF] last:min-w-[50px]'
+    : `text-[#FFF]  `
     }`;
 }
 

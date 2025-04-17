@@ -1,7 +1,6 @@
 export interface AuthInterface {
   email: string;
   password: string;
-  // rememberMe: boolean;
 }
 
 export interface SocialLoginAuth {
