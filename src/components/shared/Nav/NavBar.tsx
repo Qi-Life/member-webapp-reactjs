@@ -60,7 +60,6 @@ let navigationMobileToken = [
   { name: 'Reviews', href: 'https://qilifestore.com/pages/reviews', target: true },
   { name: 'Videos', href: '/video' },
   { name: 'Help', href: 'https://help.qilifestore.com/en-US', target: true },
-  // { name: 'Notification', href: "_notify" },
 ];
 
 function navItems(isMobile = false) {
@@ -75,10 +74,17 @@ function navItems(isMobile = false) {
   }, [])
 
   return (!isLogined() ? navigation : navigationToken).map((item) => {
-    if (item.href != "_notify") {
+    if(item.name == 'Login'){
       return (
         <NavItem key={item.name} href={item.href} target={item?.target} isMobile={isMobile} isExternal={item.isExternal}>
-          {item.name}
+          <span className='px-[2.25rem] py-[0.875rem]'>{item.name}</span>
+        </NavItem>
+      )
+    }
+    else if (item.href != "_notify") {
+      return (
+        <NavItem key={item.name} href={item.href} target={item?.target} isMobile={isMobile} isExternal={item.isExternal}>
+          <span className='px-[0.75rem] py-[0.875rem] hover:underline decoration-2 underline-offset-[0.75rem]'>{item.name}</span>
         </NavItem>
       )
     } else {
@@ -252,8 +258,7 @@ function SecondaryNavbar(props: any) {
 
   return (
     <div className="flex items-center">
-      <div className="hidden lg:flex items-center space-x-1  gap-2 mr-2">{navItems()}</div>
-      {/* <div id="google_translate_element" className="h-full mr-2"></div> */}
+      <div className="hidden lg:flex items-center font-medium leading-[20px] tracking-[0.1px]">{navItems()}</div>
       <div className="!hidden md:flex items-center space-x-3 ">
         <AuthStatus />
       </div>
@@ -348,11 +353,6 @@ function MobileMenuButton() {
             size={32}
             className={`${statusUser ? 'text-clgreen' : 'text-white'}  hover:text-clgreen duration-300`}
           />
-          {/* <div
-          className={`${
-            statusUser ? 'opacity-100' : 'opacity-0 invisible'
-          } h-2 w-2 bg-white absolute top-7 right-2 rotate-[135deg]  duration-200 ease-linear`}
-        ></div> */}
           <div
             className={`${statusUser ? 'opacity-100' : 'opacity-0 invisible'
               } before:block before:absolute before:w-2 before:h-2 before:rotate-[135deg]	 before:bg-white before:right-3 before:top-8 `}
@@ -407,24 +407,6 @@ function MobileMenu({ isOpen, isOpenChild, setIsOpenChild }: MobileMenuProps) {
       ${isOpen ? `  visible overflow-y-clip h-[260px]  ` : 'invisible overflow-hidden  h-0'} `}
     >
       <ul>{navItemsMobile(true)}</ul>
-      {/* <div className="">
-        <div className={`flex items-center justify-center ml-2 shadow-md h-full`}>
-          {getAccessToken() === '' || getAccessToken() === null ? (
-            <></>
-          ) : (
-            <div
-              onClick={() => handleClickUserMobile()}
-              className="bg-[#059f83] relative w-10 h-10 rounded-full flex items-center justify-center cursor-pointer "
-            >
-              <span className="text-white font-bold text-[10px]">
-                {getInfoUser() === null ? '' : getInfoUser()?.slice(0, 3)?.toUpperCase()}
-              </span>
-              <DownIcon />
-              <MenuChildren isOpenChild={isOpenChild} />
-            </div>
-          )}
-        </div>
-      </div> */}
       <div
         onClick={(e) => handleOverlayClick(e)}
         className="h-[calc(100vh-55px)] w-screen bg-black fixed top-[55px] -z-20 bg-opacity-30"
@@ -442,8 +424,8 @@ type NavContainerProps = {
 
 function NavContainer({ children, isMenuOpen, setIsOpenChild, isOpenChild }: NavContainerProps) {
   return (
-    <nav className="shadow-lg bg-black  w-full z-50 fixed top-0 right-0 left-0 ">
-      <div className="px-3 sm:px-[3%] w-full h-[55px]">
+    <nav className="shadow-lg bg-[#2A4C4F]  w-full z-50 fixed top-0 right-0 left-0 ">
+      <div className="px-[1rem] py-[0.5rem] w-full">
         <div className="flex justify-between h-full ">{children}</div>
       </div>
 
@@ -455,15 +437,6 @@ function NavContainer({ children, isMenuOpen, setIsOpenChild, isOpenChild }: Nav
 export default function NavBar() {
   const { isMenuOpen, isOpenChild, setIsOpenChild, setIsMenuOpen } = useContext(AuthContext);
   const location = useLocation();
-
-  // useEffect(() => {
-  //   if (getAccessToken() !== null || getAccessToken() !== '' || typeof getAccessToken() !== 'undefined') {
-  //     const joinNowIndex = navigation.findIndex((item) => item.name === 'Login');
-  //     if (joinNowIndex !== -1) {
-  //       navigation = navigation.filter((item) => item.name !== 'Login');
-  //     }
-  //   }
-  // }, [getAccessToken()]);
 
   useEffect(() => {
     getUser()

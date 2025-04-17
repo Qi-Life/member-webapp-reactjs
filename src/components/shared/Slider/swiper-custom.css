@@ -1,0 +1,23 @@
+.swiper-container {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.slide-box {
+    background: url('http://localhost:3001/src/assets/img/banner/1.%20qicoil-max-scalar_300x250%20admob.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 400px;
+    width: 600px;
+    border-radius: 20px;
+    color: white;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.swiper-slide-active {
+    height: 300px !important;
+}
