@@ -1,7 +1,7 @@
 import { FormEvent, useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import Head from '~/components/shared/Head';
+import Head from '~/components/shared/UI/Head';
 
 import { forgotPassword } from '~/services/AuthServices';
 import { AppContext } from '../context/AppProvider';

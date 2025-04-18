@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { getFrequencies, searchFrequency } from '~/services/FrequencyServices';
-import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { searchFrequency } from '~/services/FrequencyServices';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { FaLock, FaSpinner } from 'react-icons/fa';
 import frequencyImage from '~/assets/img/image/frequency.png';
 import LoadingButton from '~/components/LoadingButton';
@@ -24,8 +24,7 @@ const Rife = () => {
   const [currentPage, setCurrentPage] = useState(Number.isNaN(page) ? '1' : String(page));
   const [totalPage, setTotalPage] = useState(0);
   const [totalRecord, setTotalRecord] = useState('0');
-  const [showModal, setShowModal] = useState(false);
-  const [statusChildMenu, setStatusChildMenu] = useState(false);
+
 
   // responsive paginate
   const [pageRange, setPageRange] = useState(5); // Set the initial value

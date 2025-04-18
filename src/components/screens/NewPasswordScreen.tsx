@@ -1,11 +1,13 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
+import { toast } from 'react-toastify';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+
 import { newPassword } from '~/services/AuthServices';
 import { AppContext } from '../context/AppProvider';
 import LoadingButton from '../LoadingButton';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import { isLogined } from '~/helpers/token';
-import Head from '../shared/Head';
+
+import Head from '../shared/UI/Head';
 
 const NewPasswordScreen = () => {
   const { firstLogin, loading, setLoading } = useContext(AppContext);

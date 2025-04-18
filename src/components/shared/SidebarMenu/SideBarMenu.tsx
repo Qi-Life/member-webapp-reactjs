@@ -43,7 +43,7 @@ const menuConfigs: MenuConfig[] = [
         active: 0,
         name: 'Rife Frequencies',
         icon: rifeIcon,
-        path: '/frequencies/1/0'
+        path: '/rife-frequencies'
     },
     {
         id: 3,

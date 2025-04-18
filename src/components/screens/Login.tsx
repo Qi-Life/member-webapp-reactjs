@@ -1,12 +1,13 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
 import { loginUser } from '../../services/AuthServices';
 import { setAccessToken, setUserAndPasswordLocal, isLogined } from '../../helpers/token';
 import { AppContext } from '../context/AppProvider';
-import Head from '../shared/Head';
+import Head from '../shared/UI/Head';
 import LoadingButton from '../LoadingButton';
 import { addDeviceTokenFCM } from '~/services/ProfileService';
-import { toast } from 'react-toastify';
 import { useAudio } from '../context/AudioProvider';
 import { validateEmail } from '~/helpers/util';
 import { AuthInterface } from '~/interface/auth.interface';

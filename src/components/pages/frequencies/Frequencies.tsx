@@ -9,10 +9,10 @@ import LoadingButton from '~/components/LoadingButton';
 import ReactPaginate from 'react-paginate';
 import ScrollToTop from '~/components/ScrollToTop';
 import { AppContext } from '~/components/context/AppProvider';
-import LazyImage from '~/components/shared/LazyImage';
 import { checkLockAlbum, getUnlockUrl, isLogined } from '~/helpers/token';
 import NoResults from '~/components/NoResult';
-import SearchForm from '~/components/shared/SearchForm';
+import LazyImage from '~/components/shared/Loader/LazyImage';
+import SearchForm from '~/components/shared/UI/SearchForm';
 
 const Frequencies = () => {
   const navigate = useNavigate();
@@ -54,7 +54,7 @@ const Frequencies = () => {
       if (subcategoryId == 'all') {
         subCategoryQuery = null;
       }
-      const res = await getFrequencies(keyword, categoryIdArray, subCategoryQuery, pageNumber, id, limit);
+      const res = await getFrequencies(keyword, categoryIdArray, subCategoryQuery, pageNumber, +id, +limit);
       
       if (res?.data?.frequencies === null) {
         setDataFrequencies([]);

@@ -16,7 +16,6 @@ import EditCustomFrequencyModal from './EditCustomFrequencyModal';
 import { IoClose } from 'react-icons/io5';
 import { toast } from 'react-toastify';
 import AudioPlayer from '~/components/shared/Audio/AudioPlayer';
-import { trackFacebookEvent, trackFacebookEventCustom } from '~/helpers/fbq';
 
 const CustomFrequenciesDetail = (props: any) => {
   const { getMyPlaylist, setSearchInput } = useContext(AppContext);

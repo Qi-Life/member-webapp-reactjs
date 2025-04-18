@@ -1,7 +1,6 @@
 import { Suspense } from 'react';
 import { BrowserRouter, RouteObject, useRoutes, Navigate } from 'react-router-dom';
 import RequireAuth from './RequireAuth';
-import Loading from '~/components/shared/Loading';
 import ThankPayment from '../shared/SubscriptionForm/ThankPayment';
 
 import HomeScreen from '~/components/screens/Home';
@@ -45,383 +44,391 @@ import MainLayout from '../layout/MainLayout';
 import LayoutWithoutSideBar from '../layout/LayoutWithoutSideBar';
 import HolictisLayout from '../layout/HolictisLayout';
 import MHolictisLayout from '../layout/MHolictisLayout';
+import RifeFrequency from '../pages/frequencies/RifeFrequency';
+import Loading from '../shared/Loader/Loading';
 
 function Routes() {
-  const routes: RouteObject[] = [
-    {
-      path: '/',
-      element: <MainLayout />,
-      children: [
+    const routes: RouteObject[] = [
         {
-          path: '/masterwong-ai',
-          element: <HandleChatMessage />,
+            path: '/',
+            element: <MainLayout />,
+            children: [
+                {
+                    path: '/masterwong-ai',
+                    element: <HandleChatMessage />,
+                },
+                {
+                    path: '/goback',
+                    element: <div />,
+                },
+                {
+                    path: '/silent-quantum',
+                    element: <SilentScalar />,
+                },
+                {
+                    index: true,
+                    element: (
+                        // <CheckAuth>
+                        <Navigate to="/starter-frequencies" />
+                        // </CheckAuth>
+                    ),
+                },
+                {
+                    path: '/starter-frequencies',
+                    element: (
+                        // <RequireAuth>
+                        <HomeScreen />
+                        // </RequireAuth>
+                    ),
+                },
+                {
+                    path: '/search',
+                    element: (
+                        // <RequireAuth>
+                        <SearchScreen />
+                        // </RequireAuth>
+                    ),
+                },
+                {
+                    path: '/favorites',
+                    element: (
+                        <RequireAuth>
+                            <FavoritesScreen />
+                        </RequireAuth>
+                    ),
+                },
+                {
+                    path: '/individual-albums',
+                    element: (
+                        <RequireAuth>
+                            <IndividuaAlbum />
+                        </RequireAuth>
+                    ),
+                },
+                {
+                    path: '/featured',
+                    element: <FeaturedScreen />,
+                },
+                {
+                    path: '/custom-frequencies',
+                    element: (
+                        <RequireAuth>
+                            <CustomFrequenciesScreen />
+                        </RequireAuth>
+                    ),
+                },
+                {
+                    path: '/rife-frequencies',
+                    element: (
+                        <RifeFrequency />
+                    ),
+                },
+                {
+                    path: '/frequencies/:categoryIdParam/:subcategoryIdparam',
+                    element: (
+                        // <RequireAuth>
+                        <FrequenciesScreen />
+                        // </RequireAuth>
+                    ),
+                },
+                {
+                    path: '/membership-frequencies/:categoryIdParam/:subcategoryIdparam',
+                    element: (
+                        // <RequireAuth>
+                        <FrequenciesScreen />
+                        // </RequireAuth>
+                    ),
+                },
+                {
+                    path: '/popular_playlist_list',
+                    element: <PlaylistsScreen />,
+                },
+                {
+                    path: '/playlists_list',
+                    element: (
+                        <RequireAuth>
+                            <MyPlaylistsScreen />
+                        </RequireAuth>
+                    ),
+                },
+
+                {
+                    path: '/profile',
+                    element: (
+                        <RequireAuth>
+                            <ProfileScreen />
+                        </RequireAuth>
+                    ),
+                },
+                {
+                    path: '/notifications/:id',
+                    element: (
+                        <RequireAuth>
+                            <NotificationDetail />
+                        </RequireAuth>
+                    ),
+                },
+                {
+                    path: '/member',
+                    element: (
+                        <RequireAuth>
+                            <MembersScreen />
+                        </RequireAuth>
+                    ),
+                },
+
+                {
+                    path: '*',
+                    element: <NotFoundScreen />,
+                },
+            ],
         },
         {
-          path: '/goback',
-          element: <div />,
-        },
-        {
-          path: '/silent-quantum',
-          element: <SilentScalar />,
-        },
-        {
-          index: true,
-          element: (
-            // <CheckAuth>
-            <Navigate to="/starter-frequencies" />
-            // </CheckAuth>
-          ),
-        },
-        {
-          path: '/starter-frequencies',
-          element: (
-            // <RequireAuth>
-            <HomeScreen />
-            // </RequireAuth>
-          ),
-        },
-        {
-          path: '/search',
-          element: (
-            // <RequireAuth>
-            <SearchScreen />
-            // </RequireAuth>
-          ),
-        },
-        {
-          path: '/favorites',
-          element: (
-            <RequireAuth>
-              <FavoritesScreen />
-            </RequireAuth>
-          ),
-        },
-        {
-          path: '/individual-albums',
-          element: (
-            <RequireAuth>
-              <IndividuaAlbum />
-            </RequireAuth>
-          ),
-        },
-        {
-          path: '/featured',
-          element: <FeaturedScreen />,
-        },
-        {
-          path: '/custom-frequencies',
-          element: (
-            <RequireAuth>
-              <CustomFrequenciesScreen />
-            </RequireAuth>
-          ),
-        },
-        {
-          path: '/frequencies/:categoryIdParam/:subcategoryIdparam',
-          element: (
-            // <RequireAuth>
-            <FrequenciesScreen />
-            // </RequireAuth>
-          ),
-        },
-        {
-          path: '/membership-frequencies/:categoryIdParam/:subcategoryIdparam',
-          element: (
-            // <RequireAuth>
-            <FrequenciesScreen />
-            // </RequireAuth>
-          ),
-        },
-        {
-          path: '/popular_playlist_list',
-          element: <PlaylistsScreen />,
-        },
-        {
-          path: '/playlists_list',
-          element: (
-            <RequireAuth>
-              <MyPlaylistsScreen />
-            </RequireAuth>
-          ),
+            path: '/payment',
+            element: <LayoutWithoutSideBar />,
+            children: [
+                {
+                    index: true,
+                    element: <PaymentScreen />,
+                },
+            ],
         },
 
         {
-          path: '/profile',
-          element: (
-            <RequireAuth>
-              <ProfileScreen />
-            </RequireAuth>
-          ),
-        },
-        {
-          path: '/notifications/:id',
-          element: (
-            <RequireAuth>
-              <NotificationDetail />
-            </RequireAuth>
-          ),
-        },
-        {
-          path: '/member',
-          element: (
-            <RequireAuth>
-              <MembersScreen />
-            </RequireAuth>
-          ),
+            path: '/login',
+            element: <LayoutWithoutSideBar />,
+            children: [
+                {
+                    index: true,
+                    element: <LoginScreen />,
+                },
+            ],
         },
 
         {
-          path: '*',
-          element: <NotFoundScreen />,
+            path: '/register',
+            element: <LayoutWithoutSideBar />,
+            children: [
+                {
+                    index: true,
+                    element: <RegisterScreen />,
+                },
+            ],
         },
-      ],
-    },
-    {
-      path: '/payment',
-      element: <LayoutWithoutSideBar />,
-      children: [
         {
-          index: true,
-          element: <PaymentScreen />,
+            path: '/forgot',
+            element: <LayoutWithoutSideBar />,
+            children: [
+                {
+                    index: true,
+                    element: <ForgotScreen />,
+                },
+            ],
         },
-      ],
-    },
+        {
+            path: '/video',
+            element: <LayoutWithoutSideBar />,
+            children: [
+                {
+                    index: true,
+                    element: <VideoScreen />,
+                },
+            ],
+        },
+        {
+            path: '/privacy-policy',
+            element: <LayoutWithoutSideBar />,
+            children: [
+                {
+                    index: true,
+                    element: <PrivacyPolicy />,
+                },
+            ],
+        },
 
-    {
-      path: '/login',
-      element: <LayoutWithoutSideBar />,
-      children: [
         {
-          index: true,
-          element: <LoginScreen />,
+            path: '/disclaimer',
+            element: <LayoutWithoutSideBar />,
+            children: [
+                {
+                    index: true,
+                    element: <Disclaimers />,
+                },
+            ],
         },
-      ],
-    },
 
-    {
-      path: '/register',
-      element: <LayoutWithoutSideBar />,
-      children: [
         {
-          index: true,
-          element: <RegisterScreen />,
+            path: '/terms-and-condition',
+            element: <LayoutWithoutSideBar />,
+            children: [
+                {
+                    index: true,
+                    element: <TermsOfService />,
+                },
+            ],
         },
-      ],
-    },
-    {
-      path: '/forgot',
-      element: <LayoutWithoutSideBar />,
-      children: [
-        {
-          index: true,
-          element: <ForgotScreen />,
-        },
-      ],
-    },
-    {
-      path: '/video',
-      element: <LayoutWithoutSideBar />,
-      children: [
-        {
-          index: true,
-          element: <VideoScreen />,
-        },
-      ],
-    },
-    {
-      path: '/privacy-policy',
-      element: <LayoutWithoutSideBar />,
-      children: [
-        {
-          index: true,
-          element: <PrivacyPolicy />,
-        },
-      ],
-    },
 
-    {
-      path: '/disclaimer',
-      element: <LayoutWithoutSideBar />,
-      children: [
         {
-          index: true,
-          element: <Disclaimers />,
+            path: '/inner_frequencies',
+            element: <LayoutWithoutSideBar color="bg-white" />,
+            children: [
+                {
+                    index: true,
+                    element: <InnerFrequencyScreen />,
+                },
+            ],
         },
-      ],
-    },
+        {
+            path: '/custom-frequencies-detail',
+            element: <LayoutWithoutSideBar color="bg-white" />,
+            children: [
+                {
+                    index: true,
+                    element: <CustomFrequenciesDetail />,
+                },
+            ],
+        },
+        {
+            path: '/tutorials',
+            element: <LayoutWithoutSideBar />,
+            children: [
+                {
+                    index: true,
+                    element: <TutorialScreen />,
+                },
+            ],
+        },
+        {
+            path: '/playlists',
+            element: <LayoutWithoutSideBar />,
+            children: [
+                {
+                    index: true,
+                    element: <PlaylistsItemScreen name="myplaylist" />,
+                },
+            ],
+        },
+        {
+            path: '/popular_playlists',
+            element: <LayoutWithoutSideBar />,
+            children: [
+                {
+                    index: true,
+                    element: <PlaylistsItemScreen />,
+                },
+            ],
+        },
+        {
+            path: '/change-password',
+            element: <LayoutWithoutSideBar />,
+            children: [
+                {
+                    index: true,
+                    element: <ChangePasswordScreen />,
+                },
+            ],
+        },
+        {
+            path: '/payment-success',
+            element: <LayoutWithoutSideBar />,
+            children: [
+                {
+                    index: true,
+                    element: <ThankPayment />,
+                },
+            ],
+        },
+        {
+            path: '/not-found-subscription',
+            element: <LayoutWithoutSideBar />,
+            children: [
+                {
+                    index: true,
+                    element: <NotFoundSubscription />,
+                },
+            ],
+        },
+        {
+            path: '/new-password',
+            element: <LayoutWithoutSideBar />,
+            children: [
+                {
+                    index: true,
+                    element: <NewPasswordScreen />,
+                },
+            ],
+        },
+        {
+            path: '/holistic-health/landing',
+            element: <HolictisLayout />,
+            children: [
+                {
+                    index: true,
+                    element: <HolisticHealthLanding1 />,
+                },
+            ],
+        },
+        {
+            path: '/holistic-health/start',
+            element: <HolictisLayout />,
+            children: [
+                {
+                    index: true,
+                    element: <HolisticHealth />,
+                },
+            ],
+        },
+        {
+            path: '/holistic-health/result',
+            element: <HolictisLayout />,
+            children: [
+                {
+                    index: true,
+                    element: <HolisticHealthResult />,
+                },
+            ],
+        },
+        {
+            path: '/holistic-health/m-landing',
+            element: <MHolictisLayout />,
+            children: [
+                {
+                    index: true,
+                    element: <MHolisticHeathLanding />,
+                },
+            ],
+        },
+        {
+            path: '/holistic-health/m-start',
+            element: <MHolictisLayout />,
+            children: [
+                {
+                    index: true,
+                    element: <MHolisticHeath />,
+                },
+            ],
+        },
+        {
+            path: '/holistic-health/m-result',
+            element: <MHolictisLayout />,
+            children: [
+                {
+                    index: true,
+                    element: <MHolisticHeathResult />,
+                },
+            ],
+        },
+    ];
 
-    {
-      path: '/terms-and-condition',
-      element: <LayoutWithoutSideBar />,
-      children: [
-        {
-          index: true,
-          element: <TermsOfService />,
-        },
-      ],
-    },
+    const element = useRoutes(routes);
 
-    {
-      path: '/inner_frequencies',
-      element: <LayoutWithoutSideBar color="bg-white" />,
-      children: [
-        {
-          index: true,
-          element: <InnerFrequencyScreen />,
-        },
-      ],
-    },
-    {
-      path: '/custom-frequencies-detail',
-      element: <LayoutWithoutSideBar color="bg-white" />,
-      children: [
-        {
-          index: true,
-          element: <CustomFrequenciesDetail />,
-        },
-      ],
-    },
-    {
-      path: '/tutorials',
-      element: <LayoutWithoutSideBar />,
-      children: [
-        {
-          index: true,
-          element: <TutorialScreen />,
-        },
-      ],
-    },
-    {
-      path: '/playlists',
-      element: <LayoutWithoutSideBar />,
-      children: [
-        {
-          index: true,
-          element: <PlaylistsItemScreen name="myplaylist" />,
-        },
-      ],
-    },
-    {
-      path: '/popular_playlists',
-      element: <LayoutWithoutSideBar />,
-      children: [
-        {
-          index: true,
-          element: <PlaylistsItemScreen />,
-        },
-      ],
-    },
-    {
-      path: '/change-password',
-      element: <LayoutWithoutSideBar />,
-      children: [
-        {
-          index: true,
-          element: <ChangePasswordScreen />,
-        },
-      ],
-    },
-    {
-      path: '/payment-success',
-      element: <LayoutWithoutSideBar />,
-      children: [
-        {
-          index: true,
-          element: <ThankPayment />,
-        },
-      ],
-    },
-    {
-      path: '/not-found-subscription',
-      element: <LayoutWithoutSideBar />,
-      children: [
-        {
-          index: true,
-          element: <NotFoundSubscription />,
-        },
-      ],
-    },
-    {
-      path: '/new-password',
-      element: <LayoutWithoutSideBar />,
-      children: [
-        {
-          index: true,
-          element: <NewPasswordScreen />,
-        },
-      ],
-    },
-    {
-      path: '/holistic-health/landing',
-      element: <HolictisLayout />,
-      children: [
-        {
-          index: true,
-          element: <HolisticHealthLanding1 />,
-        },
-      ],
-    },
-    {
-      path: '/holistic-health/start',
-      element: <HolictisLayout />,
-      children: [
-        {
-          index: true,
-          element: <HolisticHealth />,
-        },
-      ],
-    },
-    {
-      path: '/holistic-health/result',
-      element: <HolictisLayout />,
-      children: [
-        {
-          index: true,
-          element: <HolisticHealthResult />,
-        },
-      ],
-    },
-    {
-      path: '/holistic-health/m-landing',
-      element: <MHolictisLayout />,
-      children: [
-        {
-          index: true,
-          element: <MHolisticHeathLanding />,
-        },
-      ],
-    },
-    {
-      path: '/holistic-health/m-start',
-      element: <MHolictisLayout />,
-      children: [
-        {
-          index: true,
-          element: <MHolisticHeath />,
-        },
-      ],
-    },
-    {
-      path: '/holistic-health/m-result',
-      element: <MHolictisLayout />,
-      children: [
-        {
-          index: true,
-          element: <MHolisticHeathResult />,
-        },
-      ],
-    },
-  ];
-
-  const element = useRoutes(routes);
-
-  return <Suspense fallback={<Loading />}>{element}</Suspense>;
+    return <Suspense fallback={<Loading />}>{element}</Suspense>;
 }
 
 export default function Router() {
-  return (
-    <BrowserRouter>
-      <Routes />
-    </BrowserRouter>
-  );
+    return (
+        <BrowserRouter>
+            <Routes />
+        </BrowserRouter>
+    );
 }

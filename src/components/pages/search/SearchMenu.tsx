@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useCallback, useContext } from 'react';
-import SearchIcon from '~/components/shared/Icons/SearchIcon';
 import { getFrequencies } from '~/services/FrequencyServices';
 import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 import FilterIcon from '~/components/shared/Icons/FilterIcon';
 import SideBarMenuModal from '../../shared/SidebarMenu/SideBarMenuModal';
 import LoadingButton from '~/components/LoadingButton';
 import { AppContext } from '~/components/context/AppProvider';
-import SearchForm from '~/components/shared/SearchForm';
+import SearchForm from '~/components/shared/UI/SearchForm';
 
 const SearchMenu = () => {
   const search = useLocation().search;
@@ -38,7 +37,7 @@ const SearchMenu = () => {
   const getDataFrequencies = async (pageNumber: string) => {
     try {
       setLoading(true);
-      const res = await getFrequencies(keyword, categoryIdArray, subcategoryId, pageNumber, id, limit);
+      const res = await getFrequencies(keyword, categoryIdArray, subcategoryId, pageNumber, +id, +limit);
       if (res?.data?.frequencies === null) {
         setDataFrequencies([]);
         loadImage();

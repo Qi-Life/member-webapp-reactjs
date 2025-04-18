@@ -1,15 +1,16 @@
 import React, { useRef, useState, useEffect, useContext } from 'react';
 import Slider from 'react-slick';
+import { Link, useNavigate } from 'react-router-dom';
+import { FaLock } from 'react-icons/fa';
 
 import photoItem from '~/assets/img/image/frequency.png';
 import { getFavorites } from '~/services/FavoritesServices';
 import { FaCircleChevronLeft } from 'react-icons/fa6';
 import { FaCircleChevronRight } from 'react-icons/fa6';
 import { AppContext } from './context/AppProvider';
-import { Link, useNavigate } from 'react-router-dom';
-import { FaLock } from 'react-icons/fa';
-import { checkLockAlbum, checkLockByCategory, isLogined, getAccessToken } from '~/helpers/token';
-import LazyImage from './shared/LazyImage';
+
+import { checkLockAlbum, checkLockByCategory, isLogined } from '~/helpers/token';
+import LazyImage from './shared/Loader/LazyImage';
 
 const Favorites = () => {
   const { setInfoItem } = useContext(AppContext);

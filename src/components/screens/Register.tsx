@@ -1,13 +1,12 @@
 import React, { FormEvent, useState, useContext } from 'react';
-// import ReCAPTCHA from 'react-google-recaptcha';
 import { useNavigate } from 'react-router-dom';
-import Head from '../shared/Head';
 import { loginUser, registerUser } from '../../services/AuthServices';
 import { AppContext } from '../context/AppProvider';
-import LoadingButton from '../LoadingButton';
 import { setAccessToken, setUserAndPasswordLocal } from '~/helpers/token';
 import { trackFacebookEvent } from '~/helpers/fbq';
 import { validateEmail } from '~/helpers/util';
+import LoadingButton from '../LoadingButton';
+import Head from '../shared/UI/Head';
 
 import freeFrequencyBundles from '../../assets/img/image/free_frequency_bundles.png';
 import { RegisterType } from '~/interface/auth.interface';

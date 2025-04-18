@@ -13,12 +13,12 @@ import LoadingButton from '~/components/LoadingButton';
 import ModalCreateNewPlaylist from '~/components/shared/modal/ModalCreateNewPlaylist';
 import { getFavorites, saveFavorite } from '~/services/FavoritesServices';
 import { checkLockAlbum, isLogined, getUnlockUrl } from '~/helpers/token';
-import Head from '~/components/shared/Head';
 import { useAudio } from '~/components/context/AudioProvider';
 import AudioPlayer from '~/components/shared/Audio/AudioPlayer';
-import SearchForm from '~/components/shared/SearchForm';
 import NavigateDropdown from '~/components/shared/Dropdown/NavigateDropdown';
 import { trackFacebookEvent, trackFacebookEventCustom } from '~/helpers/fbq';
+import Head from '~/components/shared/UI/Head';
+import SearchForm from '~/components/shared/UI/SearchForm';
 
 const Item = (props: any) => {
   const { getMyPlaylist, setSearchInput, pathName } = useContext(AppContext);
@@ -58,7 +58,7 @@ const Item = (props: any) => {
 
       if (_playlistId && cateoryId !== '') {
         setLoading(true);
-        const res = await getFrequencies('', [], '', '1', _playlistId);
+        const res = await getFrequencies('', [], '', '1', +_playlistId);
         const dataItem = res.data.frequencies[0]
 
         if (!dataItem?.id) {

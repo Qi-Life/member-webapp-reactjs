@@ -8,8 +8,8 @@ import photoItem from '~/assets/img/custom_playlist.jpeg';
 import FeaturedFrequencies from './FeaturedFrequencies';
 import { FreeFrequenciesType } from '~/interface/components.interface';
 import { getFreeAlbums } from '~/services/AlbumServices';
-import LazyImage from './shared/LazyImage';
 import { isLogined } from '~/helpers/token';
+import LazyImage from './shared/Loader/LazyImage';
 
 
 const FreeFrequencies = (props: any) => {

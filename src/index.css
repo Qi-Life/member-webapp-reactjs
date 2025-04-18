@@ -1,16 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 @import 'font-awesome/css/font-awesome.min.css';
 @import 'slick-carousel/slick/slick.css';
 @import 'slick-carousel/slick/slick-theme.css';
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;700;900&display=swap');
-
+ 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 14px;
   color: #000;
   top: 0px !important;

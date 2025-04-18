@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useContext } from 'react';
-import Head from '~/components/shared/Head';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+
 import Free from '../Free';
 
 import Featured from '../Featured';
@@ -9,19 +10,19 @@ import Favorites from '~/components/Favorites';
 import FreeFrequencies from '../FreeFrequencies';
 import { getFreeAlbums } from '~/services/AlbumServices';
 import SideBarMenuModal from '../shared/SidebarMenu/SideBarMenuModal';
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import _ from 'lodash';
 import LoadingButton from '../LoadingButton';
 
 import ScrollToTop from '../ScrollToTop';
 import { AppContext } from '../context/AppProvider';
-import SearchForm from '../shared/SearchForm';
 
 import QiciolMaxBanner from '../../assets/img/banner/bn-mobile/qicoil-max-scalar_348x43_strip-banner.jpg'
 import EducationBanner from '../../assets/img/banner/bn-mobile/Education_348x43_strip-banner.jpg'
 import AcademyBanner from '../../assets/img/banner/bn-mobile/qilife-academy_348x43_strip-banner.jpg'
 import QiCenterBanner from '../../assets/img/banner/bn-mobile/qilifecenter_348x43_strip-banner.jpg'
 import HOLISTICBanner from '../../assets/img/banner/h_banner.jpg'
+import Head from '../shared/UI/Head';
+import SearchForm from '../shared/UI/SearchForm';
 
 
 export default function HomeScreen() {

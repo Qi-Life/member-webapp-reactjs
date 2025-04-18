@@ -1,6 +1,6 @@
-import Head from '~/components/shared/Head';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Head from '~/components/shared/UI/Head';
 
 export default function NotFoundScreen() {
   const navigate = useNavigate();

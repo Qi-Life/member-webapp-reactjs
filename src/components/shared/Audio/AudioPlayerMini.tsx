@@ -14,13 +14,13 @@ import suffOffIcon from '~/assets/img/playlist/shuffle_off.png';
 import siIcon from '~/assets/img/btn-sine-on.png';
 import sqIcon from '~/assets/img/btn-sq-on.png';
 import { useAudio } from '~/components/context/AudioProvider';
-import Button from '../Button';
 import ListItemAnimation from '../ListItem/ListItemAnimation';
 import AudioMultiPlayer from './AudioMultiPlayer';
 import ListItemAnimationMobile from '../ListItem/ListItemAnimationMobile';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '~/components/context/AppProvider';
 import { isLogined } from '~/helpers/token';
+import Button from '../UI/Button';
 
 declare global {
   interface Window {

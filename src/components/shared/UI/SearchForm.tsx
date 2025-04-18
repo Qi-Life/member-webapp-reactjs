@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import SearchIcon from './Icons/SearchIcon';
+import SearchIcon from 'assets/img/ic-search.png';
 
-const SearchForm = ({ onSearch, className }: any) => {
+const SearchForm = ({ onSearch }: any) => {
     const [searchInput, setSearchInput] = useState('');
 
     // Handle input change
@@ -26,21 +26,19 @@ const SearchForm = ({ onSearch, className }: any) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="flex items-center border bg-white rounded-md h-[34px] relative mb-3 border-[#9F9F9F] sm:border-[#e7e7e7]">
-            <div className="ml-2">
-                <SearchIcon w="24" />
-            </div>
+        <form onSubmit={handleSubmit} className="flex items-center bg-[#2A4C4F]/10 py-[1.18rem] px-[1.56rem] text-xl rounded-[4.37rem]">
+            <img src={SearchIcon} />
             <input
                 type="text"
                 value={searchInput}
-                className="font-light pl-3 w-full h-full bg-transparent border-none outline-none px-2 placeholder:text-[14px]"
+                className="font-light pl-3 w-full h-full bg-transparent border-none outline-none px-2 placeholder:text-xl"
                 placeholder="Search albums, rife..."
                 onChange={handleChange}
                 onKeyDown={handleSearch}
             />
             <button
                 type="submit"
-                className="bg-[#409F83] text-white px-4 h-full rounded-md ml-2 hover:bg-[#367A61] focus:outline-none md:hidden"
+                className="bg-[#409F83] text-white px-4 h-full rounded-xl ml-2 hover:bg-[#367A61] focus:outline-none md:hidden py-2"
                 onClick={handleSubmit}
             >
                 Search

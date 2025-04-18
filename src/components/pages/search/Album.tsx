@@ -1,8 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { getFrequencies, searchFrequency } from '~/services/FrequencyServices';
-import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { FaLock, FaSpinner } from 'react-icons/fa';
-import frequencyImage from '~/assets/img/image/frequency.png';
 import LoadingButton from '~/components/LoadingButton';
 import ReactPaginate from 'react-paginate';
 import { getAlbums } from '~/services/AlbumServices';
@@ -14,20 +12,15 @@ const Album = () => {
   const [, setSearchParams] = useSearchParams();
   const keyword = String(new URLSearchParams(search).get('keyword') ?? '');
   let limit = String(new URLSearchParams(search).get('limit') ?? 8);
-  const id = String(new URLSearchParams(search).get('id') ?? '');
-  const [, setItemsPerPage] = useState(8);
   const queryParams = new URLSearchParams(location.search);
   const page = Number.isNaN(parseInt(queryParams.get('page'), 10)) ? 1 : parseInt(queryParams.get('page'), 10);
   
-  const categoryId = 2;
 
   const [dataFrequencies, setDataFrequencies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(Number.isNaN(page) ? '1' : String(page));
   const [totalPage, setTotalPage] = useState(0);
   const [totalRecord, setTotalRecord] = useState('0');
-  const [showModal, setShowModal] = useState(false);
-  const [statusChildMenu, setStatusChildMenu] = useState(false);
 
   // responsive paginate
   const [pageRange, setPageRange] = useState(5); // Set the initial value

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React from 'react';
 
 import Album from '../pages/search/Album';
 import Rife from '../pages/search/Rife';

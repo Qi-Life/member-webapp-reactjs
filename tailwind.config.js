@@ -9,6 +9,11 @@ module.exports = {
             colors: {
                 clmenu: '#D2B96D',
                 clgreen: '#059F83',
+                primary: {
+                    DEFAULT: '#2A4C4F', 
+                    light: '#2A4C4F',   
+                    dark: '#2A4C4F',   
+                },
             },
             animation: {
                 'modal-slide': 'slideIn 0.5s ease-out',

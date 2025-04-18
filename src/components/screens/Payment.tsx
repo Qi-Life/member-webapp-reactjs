@@ -1,6 +1,7 @@
-import Head from '~/components/shared/Head';
 import SubscriptionForm from '~/components/shared/SubscriptionForm/SubscriptionForm';
 import { useLocation } from 'react-router-dom';
+
+import Head from '~/components/shared/UI/Head';
 
 function PaymentScreen() {
   const { state } = useLocation();

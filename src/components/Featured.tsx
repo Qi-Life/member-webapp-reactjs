@@ -1,19 +1,19 @@
 import React, { useEffect, useRef, useContext, useState } from 'react';
 
 import Slider from 'react-slick';
-
-import { FreaturedType } from '~/interface/components.interface';
-import { getFeaturedAlbums } from '~/services/AlbumServices';
-import { AppContext } from './context/AppProvider';
 import { FaCircleChevronLeft } from 'react-icons/fa6';
 import { FaCircleChevronRight } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
 import { FaLock } from 'react-icons/fa';
-import { checkLockAlbum, getAccessToken } from '~/helpers/token';
-import LazyImage from './shared/LazyImage';
+import { FreaturedType } from '~/interface/components.interface';
+import { getFeaturedAlbums } from '~/services/AlbumServices';
+import { AppContext } from './context/AppProvider';
+
+import { checkLockAlbum } from '~/helpers/token';
+import LazyImage from './shared/Loader/LazyImage';
 
 const Featured = () => {
-  const { dataFeatured, setDataFeatured, setInfoItem, scrollToTop } = useContext(AppContext);
+  const { dataFeatured, setDataFeatured, setInfoItem } = useContext(AppContext);
 
   const navigate = useNavigate();
   const [buttonLeft, setButtonLeft] = useState(false);

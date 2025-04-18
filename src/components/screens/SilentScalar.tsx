@@ -6,7 +6,7 @@ import BtnIconDes from '~/assets/img/btn-description.png'
 
 import ScrollToTop from '~/components/ScrollToTop';
 import { AppContext } from '~/components/context/AppProvider';
-import LazyImage from '~/components/shared/LazyImage';
+import LazyImage from '~/components/shared/Loader/LazyImage';
 
 import Switcher from '../shared/Switcher';
 import { getSilentScalarCoverImage, getSilentScalarList } from '~/services/SilentScalarServices';
@@ -15,7 +15,6 @@ import SideBarMenuModal from '../shared/SidebarMenu/SideBarMenuModal';
 import { getPostList } from '~/services/PostServices';
 import NotFoundResult from '../shared/NotFoundResult';
 import FilterIcon from '../shared/Icons/FilterIcon';
-import { FcCollapse, FcExpand } from "react-icons/fc";
 
 
 interface Post {

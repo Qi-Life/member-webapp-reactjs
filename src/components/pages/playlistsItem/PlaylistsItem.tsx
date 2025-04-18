@@ -22,7 +22,7 @@ import { toast } from 'react-toastify';
 import { useAudio } from '~/components/context/AudioProvider';
 import { MdOutlinePlaylistAdd } from "react-icons/md";
 import AudioPlayer from '~/components/shared/Audio/AudioPlayer';
-import Head from '~/components/shared/Head';
+import Head from '~/components/shared/UI/Head';
 import Switcher from '~/components/shared/Switcher';
 import { saveFavorite } from '~/services/FavoritesServices';
 import NavigateDropdown from '~/components/shared/Dropdown/NavigateDropdown';

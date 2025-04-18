@@ -12,7 +12,7 @@ import { isLogined } from '~/helpers/token';
 import ReactPaginate from 'react-paginate';
 import { AppContext } from '~/components/context/AppProvider';
 import ScrollToTop from '~/components/ScrollToTop';
-import LazyImage from '~/components/shared/LazyImage';
+import LazyImage from '~/components/shared/Loader/LazyImage';
 import { saveFavorite } from '~/services/FavoritesServices';
 
 const PlayLists = () => {

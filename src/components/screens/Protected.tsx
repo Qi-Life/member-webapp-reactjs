@@ -1,4 +1,4 @@
-import Head from '~/components/shared/Head';
+import Head from '~/components/shared/UI/Head';
 
 export default function Protected() {
   return (
