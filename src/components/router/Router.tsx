@@ -124,7 +124,7 @@ function Routes() {
                     ),
                 },
                 {
-                    path: '/frequencies/:categoryIdParam/:subcategoryIdparam',
+                    path: '/quantum-frequencies',
                     element: (
                         // <RequireAuth>
                         <FrequenciesScreen />

@@ -36,7 +36,7 @@ const menuConfigs: MenuConfig[] = [
         active: 0,
         name: 'Quantum Frequencies',
         icon: quantumIcon,
-        path: '/quantum'
+        path: '/quantum-frequencies'
     },
     {
         id: 2,

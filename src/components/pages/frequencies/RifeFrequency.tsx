@@ -1,19 +1,17 @@
-import React, { useState, useEffect, useCallback, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { getFrequencies } from '~/services/FrequencyServices';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import FilterIcon from '~/components/shared/Icons/FilterIcon';
-import { FaLock, FaSpinner } from 'react-icons/fa';
 import SideBarMenuModal from '../../shared/SidebarMenu/SideBarMenuModal';
-import frequencyImage from '~/assets/img/image/frequency.png';
 import ScrollToTop from '~/components/ScrollToTop';
 import { AppContext } from '~/components/context/AppProvider';
 import { checkLockAlbum, getUnlockUrl, isLogined } from '~/helpers/token';
 import NoResults from '~/components/NoResult';
 import Heading from '~/components/shared/UI/Heading';
-import LazyImage from '~/components/shared/Loader/LazyImage';
 import LoadingWrapper from '~/components/shared/Loader/LoadingWraper';
 import SearchForm from '~/components/shared/UI/SearchForm';
 import Paginate from '~/components/shared/UI/Paginate';
+import AlbumCard from '~/components/shared/UI/AlbumCard';
 
 const RifeFrequency = () => {
     const navigate = useNavigate();
@@ -208,53 +206,17 @@ const RifeFrequency = () => {
                     </button>
                 </div>
 
-                <div className="md:hidden block">
-
-                </div>
-
-                <div className="flex flex-wrap w-full mx-auto  md:justify-start mt-4  ">
+                <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-[1.625rem]">
                     {dataFrequencies?.length > 0 ?
                         Array.from(dataFrequencies).map((item: any, index: number) => {
                             return (
-                                <div
-                                    key={index}
-                                    className="my-1.5 w-1/2    px-2 lg:my-4  lg:w-1/3 xl:w-1/4 block cursor-pointer relative  "
-                                >
-                                    <a
-                                        onClick={() => handleClickPlayItem(item)}
-                                        className="block overflow-hidden px-4 xs:px-[1.5rem] mb-4 shadow-lg rounded-lg h-full bg-white"
-                                    >
-                                        {loading ? (
-                                            // Display spinner icon while the image is loading
-                                            <FaSpinner className="spinner-icon" />
-                                        ) : (
-                                            <div className="relative block mt-[10%] xs:mt-[15%] h-auto w-full sm:w-4/5 rounded-md mx-auto">
-                                                {item?.image !== null && item?.image !== '' ? (
-                                                    <LazyImage
-                                                        src={`https://apiadmin.qienergy.ai/assets/uploads/mp3/${item.id}/${item.image}`}
-                                                        alt="photo"
-                                                        className=""
-                                                        onLoad={() => setLoading(false)}
-                                                    />
-                                                ) : (
-                                                    <LazyImage className="block " src={frequencyImage} alt="photo" />
-                                                )}
-                                                {checkLockAlbum(item) ? (
-                                                    <FaLock size={20} color="white" className="absolute bottom-[5%] right-[5%] z-10" />
-                                                ) : (
-                                                    <></>
-                                                )}
-                                            </div>
-                                        )}
-                                        <header className="py-[10px] h-auto ">
-                                            <h5 className=" text-center ">
-                                                <span className="no-underline   hover:underline text-black font-semibold text-[17px]  block truncate ">
-                                                    {item?.title}
-                                                </span>
-                                            </h5>
-                                        </header>
-                                    </a>
-                                </div>
+                                <AlbumCard
+                                    loading={loading}
+                                    item={item}
+                                    onClick={handleClickPlayItem}
+                                    checkLocked={() => checkLockAlbum(item)}
+                                    setLoading={setLoading}
+                                />
                             );
                         }) : <NoResults />}
                 </div>
